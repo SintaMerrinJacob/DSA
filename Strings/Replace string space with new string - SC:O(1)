@@ -1,0 +1,39 @@
+string replaceSpaces(string &str)
+{
+	int n = str.size();
+    int space_count = 0;
+    
+    for(int i = 0; i<n ;i++)
+    {
+        if( str[i] == ' ')
+        {
+            space_count++;
+        }
+    }
+    
+    int newsize = n+  space_count*2;
+    
+    str.resize(newsize);
+    
+    while(newsize>=0)
+    {
+        if(str[n]!=' ')
+        {
+            str[newsize] = str[n];
+        newsize--;
+        n--;
+        }
+        else
+        {
+            str[newsize--] = '0';
+            str[newsize--] = '4';
+            str[newsize--] = '@';
+            n--;
+            
+        }
+        
+    }
+    
+    return str;
+    
+}
