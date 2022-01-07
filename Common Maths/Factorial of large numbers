@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+
+unsigned long long fact(int n)
+{
+    const unsigned int m = 1000000007;
+    unsigned long long res = 1;
+    int i = 1;
+    while(i<=n)
+    {
+        res = (res * i)%m;
+        i++;
+    }
+    
+    return res;
+}
+
+int main()
+{
+    int n;
+   
+    cout<<"Enter n ";
+    cin>>n;
+    unsigned long long res = fact(n);
+    cout<<res;
+    return 0;
+}
