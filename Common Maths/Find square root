@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+
+int sqroot(int n)
+{
+    if(n == 0 || n==1)
+        return n;
+    
+    int i = 1 , result = 1;
+    
+    while(result<=n)
+    {
+        i++;
+        result = i*i;
+    }
+    return i-1;
+     
+}
+
+int main()
+{
+	int n ;
+    cin>>n;
+    cout<<sqroot(n);
+    return  0;
+}
+
+
+   
+	
