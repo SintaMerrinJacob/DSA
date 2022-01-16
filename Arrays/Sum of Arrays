@@ -1,0 +1,47 @@
+Two random integer arrays/lists have been given as ARR1 and ARR2 of size N and M respectively. Both the arrays/lists contain numbers from 0 to 9(i.e. single digit integer is present at every index). The idea here is to represent each array/list as an integer in itself of digits N and M.
+You need to find the sum of both the input arrays/list treating them as two integers and put the result in another array/list i.e. output array/list will also contain only single digit at every index.
+
+
+void sumOfTwoArrays(int *input1, int size1, int *input2, int size2, int *output)
+{
+    int i = size1 - 1;
+    int j = size2 - 1;
+    int k = 1 + max(size1,size2) - 1;
+    int carry = 0;
+    while( i>=0 && j>=0)
+    {  
+        int sum = input1[i] + input2[j] + carry;
+        if(  sum< 10 )
+        {
+            carry = 0;
+            output[k--] = sum;
+            i--;
+            j--;
+        }
+        else 
+        {
+            carry = 1;
+            output[k--] = sum%10;
+            i--;
+            j--;
+        }
+        
+    }
+    
+    while(i>=0)
+    {
+        output[k--] = input1[i--];
+    }
+    
+    while(j>=0)
+    {
+        output[k--] = input1[j--];
+    }
+    
+    if (carry == 1)
+        output[0] = 1;
+    else
+        output[0] = 0;
+    
+    
+}
