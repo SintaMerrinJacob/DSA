@@ -1,0 +1,67 @@
+For a given two-dimensional integer array/list of size (N x M), you need to find out which row or column has the largest sum(sum of all the elements in a row/column) amongst all the rows and columns.
+If there are more than one rows/columns with maximum sum, consider the row/column that comes first. And if ith row and jth column has the same largest sum, consider the ith row as answer.
+For each test case, If row sum is maximum, then print: "row" <row_index> <row_sum>
+OR
+If column sum is maximum, then print: "column" <col_index> <col_sum>
+It will be printed in a single line separated by a single space between each piece of information.
+
+Output for every test case will be printed in a seperate line.
+If there doesn't exist a sum at all then print "row 0 -2147483648", where -2147483648 or -2^31 is the smallest value for the range of Integer.
+
+#include <bits/stdc++.h>
+
+void findLargest(int **input, int nRows, int mCols)
+{
+    int rowIndex = 0;
+    int colIndex = 0;
+    int colsum = INT_MIN;
+    int rowsum = INT_MIN;
+    
+    // to find max rowsum
+    for(int i = 0 ; i<nRows ; i++ )
+    {   int sum = 0;
+        for(int j= 0 ; j<mCols ; j++ )
+        {
+            sum+=input[i][j];
+        }
+      if(sum>rowsum)
+      {
+          rowsum  = sum;
+          rowIndex = i;
+      }
+    }
+    
+    // to find max colsum
+    for(int j= 0 ; j<mCols ; j++ )
+    {
+          int sum = 0;
+          for(int i = 0 ; i<nRows ; i++ )
+          {
+                sum+=input[i][j];
+          }
+        if(sum>colsum)
+        {
+            colsum = sum;
+            colIndex = j;
+        }
+    }
+    
+    
+    
+ if(colsum == INT_MIN  && rowsum == INT_MIN)
+        cout<<"row 0 -2147483648";
+    
+    else
+    {
+        if(rowsum>colsum)
+            cout<<"row "<<rowIndex<<" "<<rowsum;
+        
+        else if(rowsum<colsum)
+            cout<<"column " <<colIndex<<" "<<colsum;
+       
+        else
+            cout<<"row "<<rowIndex<<" "<<rowsum;
+    }
+    
+    
+}
