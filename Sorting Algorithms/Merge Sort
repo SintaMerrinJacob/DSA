@@ -1,0 +1,69 @@
+void merge(vector < int > & arr, int start , int end)
+{
+    int mid = start + (end-start)/2;
+    
+    // create two arrays to keep divided elements from the main array
+    // first to keep elements from start to mid
+    //second to keep elements from mid+1 to end
+    
+    int len1 = mid-start+1;
+    int len2 = end - mid;
+    
+    int *first    = new int[len1];
+    int *second = new int[len2];
+    
+    // copy elements to the 2 arrays from main array
+    
+    int arrayIndex = start;
+    for(int i = 0 ; i <len1 ; i++)
+        first[i] = arr[arrayIndex++];
+    
+     arrayIndex = mid +1;
+    for(int i = 0 ; i <len2 ; i++)
+        second[i] = arr[arrayIndex++];
+    
+    
+    // merge 2 sorted arrays
+     int  k = start; // tracks main array
+    int firstIndex = 0;        // tracks first array
+    int secondIndex = 0;     // tracks second array
+    
+    while (  firstIndex < len1  && secondIndex< len2  )
+    {
+        if(  first[firstIndex]  <  second[secondIndex])
+             arr[ k++ ] = first[firstIndex++];
+        else
+            arr[ k++ ] = second[secondIndex++];
+    }
+    
+     while (  firstIndex < len1 )
+         arr[ k++ ] = first[firstIndex++];
+    
+    while (   secondIndex< len2  )
+         arr[ k++ ] = second[secondIndex++];
+    
+    
+    
+}
+
+void  solve( vector < int > & arr, int start , int end)
+{
+    if(start >= end)
+        return ;
+    
+    int mid = start + (end-start)/2;
+    
+    // sort left part 
+     solve(arr,start,mid);
+   
+    //sort right part
+    solve(arr,mid+1, end);
+    
+    //merge sorted subarrays
+    merge(arr,start,end);    
+}
+
+void mergeSort(vector < int > & arr, int n) 
+{
+  solve( arr, 0, n-1);
+}
