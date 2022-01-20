@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(vector<vector<int> > &ans , int index , vector<int>output , vector<int>nums  )
+{
+     cout<<endl<<endl;
+     cout<<"Solve function called for index = "<<index<<endl;
+     
+     if(index>=nums.size())
+      {
+          ans.push_back(output);
+          
+          for(int i = 0 ; i<ans.size() ;i++)
+          {   cout<<"[";
+          for(int j = 0 ; j<ans[i].size() ; j++)
+             {
+              cout<<ans[i][j]<<" ";
+             }
+          cout<<"]  "<<endl;
+          
+          }
+        cout<<"Returning back to previous call "<<endl;
+       cout<<endl<<endl;
+       
+      return ;
+
+      }
+    
+      cout<<"Solve function called for exclusion with index = "<<index<<endl;
+      solve(ans,index+1 ,output,nums);
+
+      cout<<"Solve function called for inclusion with index = "<<index<<endl;
+      int element = nums[index];
+      cout<<"Element is "<<element<<endl;
+      output.push_back(element);
+      cout<<"Output array elements are ";
+      for(int i = 0 ; i<output.size() ;i++)
+        cout<<output[i]<<" ";
+      cout<<endl;
+      
+      solve(ans,index+1 ,output,nums);
+
+
+
+}
+
+
+vector<vector<int> > subsets(vector<int> nums) 
+    {
+        vector<vector<int> > ans;
+        int index = 0 ;
+        vector<int>output;
+        solve(ans,index,output,nums);
+        return ans;
+
+        
+    }
+
+
+ int main()
+ {
+     int arr[] = {1,2,3};
+     vector<int>nums(arr,arr+3);
+     vector<vector<int> > ans = subsets(nums);
+
+     for(int i = 0 ; i<ans.size() ;i++)
+      {   cout<<"[";
+          for(int j = 0 ; j<ans[i].size() ; j++)
+          {
+              cout<<ans[i][j]<<",";
+          }
+          cout<<"] , ";
+      }
+     
+ }
