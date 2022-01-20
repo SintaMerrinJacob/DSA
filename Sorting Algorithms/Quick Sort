@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int partition(vector<int> &arr , int start , int end)
+{
+    int pivot = arr[start];
+    int count = 0 ; // tracks elements less than pivot;
+    
+    for(int i = start+1 ; i<=end ; i++)
+    {
+        if(arr[i]<=pivot)
+            count ++;
+    }
+    int pivotIndex = start + count;
+    swap(arr[start] , arr[pivotIndex]);
+    
+    int i = start , j = end;
+    
+    while( i<pivotIndex && j>pivotIndex)
+    {
+        while(arr[i] <= arr[pivotIndex])
+            i++;
+        
+        while(arr[j]>arr[pivotIndex])
+            j--;
+        
+        if( i<pivotIndex && j>pivotIndex )
+            swap( arr[i++] , arr[j--] );
+    }
+    return pivotIndex;
+}
+
+void solve(vector<int> &arr , int start , int end)
+{
+    cout<<"Solve function called with start = "<<start<<" and end = "<<end<<endl;
+    if( start>=end)
+        return ;
+    
+    int p = partition(arr,start,end);
+    cout<<"PivotIndex  = "<<p<<endl;
+    
+    solve(arr,start,p-1);   //sort left part
+    
+    solve(arr,p+1,end);  // sort right part
+}
+
+vector<int> quickSort(vector<int> &arr)
+{
+    cout<<"Quicksort function called "<<endl;
+    int n = arr.size();
+
+    solve(arr,0,n-1);
+    
+    return arr;
+}
+
+
+
+ int main()
+ {
+     int arr[] = {11,5,6,2,3,1};
+     int n = sizeof(arr)/sizeof(arr[0]);
+     vector<int>v(arr,arr+n);
+     cout<<"The initial array is ";
+     for(int i = 0 ; i<v.size() ; i++)
+        cout<<arr[i]<<" ";
+
+     cout<<endl;
+     vector<int>ans = quickSort(v);
+     cout<<"The sorted array is ";
+     for(int i = 0 ; i<ans.size() ; i++)
+        cout<<ans[i]<<" ";
+    cout<<endl;
+    return 0;
+     
+ }
