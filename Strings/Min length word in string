@@ -1,0 +1,38 @@
+oid minLengthWord(char input[], char output[])
+{
+	int len = strlen(input);
+	int si = 0, ei = 0;
+ 
+   
+
+	int min_length = len, min_start_index = 0;
+
+	// Loop while input string is not empty
+	while (ei <= len)
+	{
+		if (ei < len && input[ei] != ' ')
+			ei++;
+		
+		else
+		{
+			// end of a word
+			// find curr word length
+			int curr_length = ei - si;
+		
+			if (curr_length < min_length)
+			{
+				min_length = curr_length;
+				min_start_index = si;
+			}
+			
+			
+			ei++;
+			si = ei;
+		}
+	}
+	
+   int k = 0 ;
+    for(int i = min_start_index ; i< (min_start_index+min_length) ; i++ )
+        output[k++] = input[i];
+    
+}
