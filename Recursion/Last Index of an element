@@ -1,0 +1,12 @@
+int lastIndex(int arr[], int size, int x) 
+{
+  if(size==0)
+      return -1;
+    
+    if(arr[size-1]==x)
+        return size-1;
+    
+    int ans =  lastIndex(arr,  size-1,  x) ;
+        
+    return ans;
+}
