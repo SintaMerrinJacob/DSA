@@ -1,0 +1,29 @@
+int maxScore(vector<int>& cardPoints, int k) 
+    {
+        int n = cardPoints.size();
+        int sum = 0;
+        
+        vector<int> cumulativeSumfromFront(n+1,0);
+        vector<int> cumulativeSumfromBack(n+1,0);
+        
+        for(int i = 0 ; i<n ; i++)
+        {
+            sum+=cardPoints[i];
+            cumulativeSumfromFront[i+1] = sum;
+        }
+        sum = 0;
+        
+        for(int i = n-1 ; i>=0 ; i--)
+        {
+            sum+=cardPoints[i];
+            cumulativeSumfromBack[i] = sum;
+        }
+        
+        reverse(cumulativeSumfromBack.begin() , cumulativeSumfromBack.end());
+        
+        int answer = 0;
+        for(int i = 0 ; i<=k ; i++)
+            answer = max(answer ,cumulativeSumfromFront[i]+cumulativeSumfromBack[k-i]);
+        
+        return answer;
+    }
