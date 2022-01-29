@@ -1,0 +1,17 @@
+int lastRemaining(int n) 
+    {
+        int start = 1 , direction = 0 , difference = 1;
+        while(n>1)
+        {
+            if(n&1 || direction==0)   // left to right condition
+            {
+                 start = start + difference;
+            }
+            
+            n = n/2;
+            difference = difference*2;
+            direction = !direction;
+        }
+        
+        return start;
+    }
