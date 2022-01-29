@@ -1,0 +1,32 @@
+Given a string S, compute recursively a new string where identical chars that are adjacent in the original string are separated from each other by a "*".
+
+
+
+#include<cstring>
+
+void  PairStarcalled(  char input[]  ,  char output[] , int i ,int k  )
+{
+    output[k++] =  input[i];
+    
+    
+    if(i==strlen(input)-1)
+        return;
+    
+    if(input[i]==input[i+1])
+        output[k++] = '*';
+    
+    PairStarcalled(input,output,i+1 ,k);
+    
+}
+
+
+void pairStar(char input[]) 
+{
+     char output[10000];
+     PairStarcalled(input,output,0 ,0);
+     int i = 0;
+    for(int k = 0 ; k<strlen(output) ; k++)
+        input[i++] = output[k];
+    
+    input[i]='\0';
+}
