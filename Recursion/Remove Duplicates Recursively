@@ -1,0 +1,27 @@
+Given a string S, remove consecutive duplicates from it recursively.
+
+INPUT :  aabccba           OUTPUT : abcba    
+         xxxyyyzwwzzz               xyzwz
+         
+         
+ void removeConsecutiveDuplicates(char *s) 
+{
+	 if( s[0] == '\0' )
+         return ;
+    
+    if(s[0]!=s[1])
+        return removeConsecutiveDuplicates(s+1);
+    
+    else if(s[0]==s[1])
+    {
+        int i;
+        for( i = 1 ; s[i]!='\0' ; i++ )
+            s[i-1] = s[i];
+        
+        s[i-1] = '\0';
+        return removeConsecutiveDuplicates(s);
+    }
+         
+
+
+}
