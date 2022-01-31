@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int subs(string input, string output[])
+{
+    
+    if(input.empty())
+     {
+         output[0]="";
+         return 1;
+     }
+     
+     string smallstring = input.substr(1);
+     int len = subs(smallstring,output);
+     for(int i = 0 ; i<len ;i++ )
+        output[i+len] = input[0]+output[i];
+        
+   
+    return 2*len;
+}
+
+
+int main()
+{
+   string input = "abc";
+   int inputlength = input.size();
+   int outputsize = pow(2,inputlength);
+   string *output = new string[outputsize];
+   int len = subs(input,output);
+   for(int i = 0 ;i<len ;i++)
+      cout<<output[i]<<endl;
+   return 0;
+}
+
+
+
+
+
+
+
+
+
