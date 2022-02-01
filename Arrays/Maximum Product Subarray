@@ -1,0 +1,16 @@
+int maxProduct(vector<int>& arr) 
+    {
+        int maxprdt  = arr[0];
+        int currmax = arr[0];
+        int currmin = arr[0];
+        
+        for(int i = 1 ; i<arr.size() ;i++)
+        {
+            int temp = max ( {arr[i] , arr[i]*currmax, arr[i]*currmin });
+            currmin  = min ( {arr[i] , arr[i]*currmax, arr[i]*currmin });
+            currmax = temp;
+            maxprdt = max(maxprdt,currmax);
+        }
+        
+        return  maxprdt;
+    }
