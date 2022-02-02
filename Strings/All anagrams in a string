@@ -1,0 +1,38 @@
+ vector<int> findAnagrams(string s, string p) 
+    {
+        vector<int>ans;
+        int textlen = s.length();
+        int patlen = p.length();
+        
+        if(patlen > textlen)
+            return ans;
+        
+        vector<int>texthash(26,0);
+        vector<int>pathash(26,0);
+        
+        int left = 0 , right = 0;
+        
+        while(right<patlen)
+        {
+            pathash[p[right]-'a']++;
+            texthash[s[right++]-'a']++;
+            
+        }
+        right-=1;
+        while(right<textlen)
+        {
+            if(texthash == pathash)
+                ans.push_back(left);
+            
+            right++;
+            
+            if(right!=textlen)
+                texthash[s[right]-'a']++;
+            
+            texthash[s[left]-'a']--;
+            
+            left++;
+        }
+        
+        return ans;
+    }
