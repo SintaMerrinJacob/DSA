@@ -1,0 +1,60 @@
+Given an array A and an integer K, print all subsets of A which sum to K.
+Subsets are of length varying from 0 to n, that contain elements of the array. But the order of elements should remain same as in the input array.
+Note : The order of subsets are not important. Just print them in different lines.
+
+Sample Input:
+9 
+5 12 3 17 1 18 15 3 17 
+6
+
+Sample Output
+3 3
+5 1
+
+
+#include <vector>
+
+void solve (int input[] , vector< vector<int> >&ans , vector<int>temp,int index , int n ,int k)
+{
+    //base case 
+   
+    if(index == n)
+    {
+        int sum = 0;
+        for( int j = 0 ; j<temp.size() ;j++)
+            sum += temp[j];
+        
+        if(k==sum)
+        {
+             for( int j = 0 ; j<temp.size() ;j++)
+              {
+               cout<<temp[j]<<" ";
+              }
+            cout<<endl;
+        }
+        
+        return;
+    }
+    
+    // exc
+    solve(input,ans, temp,index+1,n,k);
+    
+    //inc
+    temp.push_back(input[index]);
+     solve(input,ans, temp,index+1,n,k);
+    
+    
+}
+
+
+
+
+
+void printSubsetSumToK(int input[], int size, int k) 
+{
+    vector< vector<int> >ans;
+    vector<int>temp ; 
+    int index = 0;
+    solve(input,ans, temp,index,size,k);
+    
+ }   
