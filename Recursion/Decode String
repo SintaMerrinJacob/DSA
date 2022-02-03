@@ -1,0 +1,45 @@
+#include <string.h>
+#include <vector>
+using namespace std;
+
+void decode(string input , string out,  vector<string> &s )
+{
+    if(input.size() == 0)
+    {
+        s.push_back(out);
+        return;
+    }
+    if(input[0]== '0')
+        return;
+    
+    int singledigit =   ( input[0] - '0');
+    char c1 = singledigit + 96;
+    decode( input.substr(1), out+c1 , s );
+    
+    if( input.size() > 1)
+    {
+        int twodigit = ( input[0] - '0')*10 +  ( input[1] - '0');
+        if(twodigit > 26 )
+            return;
+        
+        char c2 =  twodigit + 96;
+        decode( input.substr(2), out+c2 , s );
+        
+    }
+        
+    
+}
+int getCodes(string input, string output[10000]) 
+{
+    vector<string>s;
+    string out = "";
+    decode(input,out,s);
+    
+    for(int i = 0 ; i<s.size() ;i++)
+        output[i] = s[i];
+    
+    int k =  s.size();
+    return k;
+    
+}
+
