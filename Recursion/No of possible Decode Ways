@@ -1,0 +1,32 @@
+int numDecodings(string s) 
+    {
+        
+        if(s.length()==0 || s[0]=='0')
+            return 0;
+        
+        if(s.length()==1)
+            return 1;
+        
+        int count_to_twoprev = 1 , count_to_prev = 1 ;
+        
+        for(int i = 1; i<s.length() ; i++)
+        {
+            int curdigit = s[i]-'0';
+            int prevdigit = (s[i-1] - '0')*10 + curdigit;
+            int count = 0;
+            if(curdigit>0)
+                count += count_to_prev;
+            
+            if(prevdigit>=10 && prevdigit<=26 )
+                count += count_to_twoprev;
+            
+            
+            count_to_twoprev = count_to_prev;
+            count_to_prev = count;
+        }
+        
+       return count_to_prev; 
+    }
+    
+    
+    
