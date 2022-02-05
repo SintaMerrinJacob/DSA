@@ -1,0 +1,17 @@
+Given an array where every element occurs three times, except one element which occurs only once. 
+Find the element that occurs once. The expected time complexity is O(n) and O(1) extra space. 
+
+int singleNumber(vector<int>& nums)
+    {
+        int singleoccurence = 0; // stores element that occurs one time
+        int twooccurence = 0;    // stores element that occurs twice
+        // both will reject an arr[i] that occurs thrice;
+        
+        for(int i = 0 ; i<nums.size() ;i++)
+        {
+            singleoccurence = (singleoccurence^nums[i]) & (~twooccurence);
+            twooccurence    = (twooccurence^nums[i]) & (~singleoccurence);
+        }
+        
+        return singleoccurence;
+    }
