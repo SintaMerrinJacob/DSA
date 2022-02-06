@@ -1,0 +1,20 @@
+You are given a positive integer num consisting of exactly four digits. Split num into two new integers new1 and new2 by using the digits found in num. 
+Leading zeros are allowed in new1 and new2, and all the digits found in num must be used.
+
+For example, given num = 2932, you have the following digits: two 2's, one 9 and one 3. Some of the possible pairs [new1, new2] are [22, 93], [23, 92], [223, 9] and [2, 329].
+
+int minimumSum(int num) 
+    {
+        string s = to_string(num);
+        sort(s.begin(),s.end());
+        int result = ( ( s[0] -'0')*10 + s[2]-'0'  )  + ( ( s[1] -'0')*10 + s[3]-'0'  );
+        return result;
+    }
+    
+    
+    
+    
+    Here, we need two new integers, both should contain two digits. And to minimize the sum both the integers should be small. 
+    Take it this way | The first integer will be (s[0] - '0') * 10 + s[3] - '0' and the second integer will be (s[1] - '0') * 10 + s[2] - '0' . 
+    To minimize the two-digit numbers, the digit in the 'tens' place should be small. As the digit is in the 'tens' place, 
+    we need to multiply it by 10. For e.g. 23 = 2*10 + 3. Hope you understood !!
