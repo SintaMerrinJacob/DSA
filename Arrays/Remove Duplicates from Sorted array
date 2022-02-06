@@ -1,0 +1,13 @@
+Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. 
+The relative order of the elements should be kept the same.
+
+int removeDuplicates(vector<int>& nums) 
+    {
+        int index = 0;
+        for( auto element : nums)
+        {
+            if(index<2 || element>nums[index-2])
+                nums[index++] = element;
+        }
+        return index;
+    }
