@@ -1,3 +1,8 @@
+You have been given an integer array/list(ARR) and a number 'num'. Find and return the total number of pairs in the array/list which sum to 'num'.
+
+
+
+
 int pairSum(int *arr, int n, int num)
 {
     sort(arr,arr+n);
