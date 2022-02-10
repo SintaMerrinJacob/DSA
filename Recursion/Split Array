@@ -1,0 +1,37 @@
+Given an integer array arr[], the task is to check if the input array can be split in two sub-arrays such that: 
+ 
+
+Sum of both the sub-arrays is equal.
+All the elements which are divisible by 5 should be in the same group.
+All the elements which are divisible by 3 (but not divisible by 5) should be in the other group.
+Elements which are neither divisible by 5 nor by 3 can be put in any group.
+If possible then print Yes else print No.
+
+
+#include<bits/stdc++.h>
+bool solve( int *input, int n , int start , int lsum , int rsum)
+{
+    if(start == n)
+        return (lsum==rsum);
+    
+    if(input[start]%5==0)
+        lsum += input[start];
+    
+    else if(input[start]%3==0)
+        rsum += input[start];
+    
+    else 
+        return solve(input,n,start+1,lsum+input[start],rsum) ||  solve(input,n,start+1,lsum,rsum+input[start]);
+    
+    return  solve(input,n,start+1,lsum,rsum);
+        
+}
+
+
+bool splitArray(int *input, int size) 
+{
+   if (solve(input,size,0,0,0) )
+       return true;
+    else
+        return false;
+}
