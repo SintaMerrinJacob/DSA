@@ -1,0 +1,27 @@
+int lengthOfLongestSubstring(string str) 
+    {
+        
+        if(str==" " || str.size()==1)
+            return 1;
+        
+        int maxlen = 0;
+        int i = 0 , j = 0;
+        unordered_set<char>s;
+        while(i < str.size() && j < str.size() )
+        {
+            if(s.find(str[j])!= s.end())
+            {
+                maxlen = max(maxlen , j-i);
+                s.clear();
+                i++;
+                j = i;
+            } 
+            else
+            {   
+                s.insert(str[j]);
+                j++;
+                maxlen = max(maxlen , j-i);
+            }
+        }
+        return maxlen;
+    }
