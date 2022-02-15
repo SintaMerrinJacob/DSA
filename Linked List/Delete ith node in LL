@@ -1,0 +1,43 @@
+Node *deleteNode(Node *head, int pos)
+{
+    //case 1:  if position <0
+    if(pos<0 || head ==NULL)
+        return head;
+    
+    //case 2 : Delete first element
+    if(pos == 0)
+    {
+        Node *a = head;
+        head = head -> next;
+        delete a;
+        return head;
+    }
+    
+    //case 3 : Delete any element other than first - pos > 0
+    
+    int count = 0;
+    Node *temp = head;
+    while(count<pos-1 &&  temp->next!=NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    
+    if(temp->next!=NULL )
+    {
+        Node *a = temp -> next;
+        Node *b =  temp -> next -> next;
+       temp -> next = b ;
+       delete a;
+        return head;
+    }
+    
+    
+    
+//case 4: pos is greater that no of elements in LL
+    if(pos >= count)
+        return head;
+    
+    
+        
+}
