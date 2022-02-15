@@ -1,0 +1,122 @@
+#include<iostream>
+
+using namespace std;
+
+class Node
+{
+    public:
+       int data;
+       Node *next;
+       
+       Node(int data)
+       {
+           this -> data = data;
+           this -> next = NULL;
+       }
+};
+
+void print( Node *head )
+{
+   Node *curr = head;
+   cout<<"The linked list elements are "<<endl;
+   while(curr !=NULL)
+   {
+       cout << curr -> data<<" ";
+       curr = curr -> next;
+   }
+   cout<<endl;
+    
+}
+
+void InsertAti_betterfunction( Node *head , int i , int num)
+{
+
+}
+Node* InsertAti(Node *head , int i , int num)
+{
+    Node* newNode = new Node(num);
+    int curpos = 0; // tracks the current node
+    //case 1 : Head is NULL
+    if(head == NULL)
+    { 
+         head = newNode;
+         return head;
+    }
+        
+         
+    Node* prevNode = NULL;
+    Node* nextNode = head;
+     //case 2 :  Insert element at the beginning
+     if(i==1)
+    {
+         
+         newNode -> next = head;
+         head = newNode;
+        
+
+    }
+
+    //case 3 : Insert element at any position other than first position
+    else
+    {
+        
+        while(curpos<i-1 )
+        {
+            curpos++;
+            prevNode = nextNode;
+            nextNode = nextNode->next;
+            if(curpos == i-1)
+              {
+            prevNode -> next = newNode;
+            newNode -> next = nextNode;
+            break;
+            }
+      
+        }
+    }
+     
+   return head;
+        
+}
+Node* takeInput()
+{
+    int num;
+    cout<<"Enter the element"<<endl;
+    cin>>num;
+    Node* temp = new Node(num);
+    Node* head = temp;
+    char ch;
+    cout<<"Do you want to continue?"<<endl;
+    cin>>ch;
+    while(ch=='y')
+    {
+        cout<<"Enter the element"<<endl;
+        cin>>num; 
+        Node* curr = new Node(num);
+        temp -> next = curr;
+        temp = curr;
+        cout<<"Do you want to continue?"<<endl;
+        cin>>ch;
+        
+    }
+    
+    
+    
+    return head;
+    
+}
+
+int main()
+{
+    Node *head = NULL;
+    head = takeInput();
+    
+   head = InsertAti(head , 1 , 45 );
+   
+    head = InsertAti(head , 3 , 33);
+  
+    head = InsertAti(head, 5, 12 );
+    head = InsertAti(head,10,100);
+      print(head);
+    return 0;
+}
