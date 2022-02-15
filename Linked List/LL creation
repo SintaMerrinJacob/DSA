@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Node
+{
+    public:
+       int data;
+       Node *next;
+       
+       Node(int data)
+       {
+           this -> data = data;
+           this -> next = NULL;
+       }
+};
+
+Node* takeInput()
+{
+    int num;
+    cout<<"Enter the element"<<endl;
+    cin>>num;
+    Node* temp = new Node(num);
+    Node* head = temp;
+    char ch;
+    cout<<"Do you want to continue?"<<endl;
+    cin>>ch;
+    while(ch=='y')
+    {
+        cout<<"Enter the element"<<endl;
+        cin>>num; 
+        Node* curr = new Node(num);
+        temp -> next = curr;
+        temp = curr;
+        cout<<"Do you want to continue?"<<endl;
+        cin>>ch;
+        
+    }
+    
+    
+    
+    return head;
+    
+}
+void print( Node *head )
+{
+   Node *curr = head;
+   cout<<"The linked list elements are "<<endl;
+   while(curr !=NULL)
+   {
+       cout << curr -> data<<" ";
+       curr = curr -> next;
+   }
+   cout<<endl;
+    
+}
+
+int main()
+{
+    Node *head = NULL;
+    head = takeInput();
+    //print(head);
+    return 0;
+}
