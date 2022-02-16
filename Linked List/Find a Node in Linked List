@@ -1,0 +1,73 @@
+class Node
+{
+public:
+	int data;
+	Node *next;
+	Node(int data)
+	{
+		this->data = data;
+		this->next = NULL;
+	}
+};
+
+int findNode(Node *head, int n)
+{
+    if(head == NULL)
+        return -1;
+    int count = 0;
+    Node *curr = head;
+    while(curr != NULL)
+    {
+        if( curr -> data == n)
+            return count;
+        
+        else
+        {
+             count++;
+             curr = curr -> next;
+        }
+            
+    }
+    
+    return -1;
+}
+
+
+using namespace std;
+#include "solution.h"
+
+Node *takeinput()
+{
+	int data;
+	cin >> data;
+	Node *head = NULL, *tail = NULL;
+	while (data != -1)
+	{
+		Node *newNode = new Node(data);
+		if (head == NULL)
+		{
+			head = newNode;
+			tail = newNode;
+		}
+		else
+		{
+			tail->next = newNode;
+			tail = newNode;
+		}
+		cin >> data;
+	}
+	return head;
+}
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		Node *head = takeinput();
+		int val;
+		cin >> val;
+		cout << findNode(head, val) << endl;
+	}
+}
