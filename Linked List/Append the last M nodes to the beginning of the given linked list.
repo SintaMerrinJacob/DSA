@@ -1,0 +1,45 @@
+You have been given a singly linked list of integers along with an integer 'N'.
+Write a function to append the last 'N' nodes towards the front of the singly linked list and returns the new head to the list.
+
+
+
+Node *appendLastNToFirst(Node *head, int n)
+{
+      // traverse till end of LL to fin total no of elements and tail node
+    if(head == NULL || n==0)
+        return head;
+    
+    Node *tail = head;
+    int len = 0;
+     while(tail->next != NULL)
+     {
+         len++;
+         tail = tail -> next;
+     }
+    len = len+1;// last element is not counter inside
+    
+    if(len-n<1)
+        return head;
+    
+    Node* newhead = NULL;
+    Node *curr = head;
+    
+    int count = 0; // tracks the position of current node
+    
+    while(count <= len - n)
+    {
+         count ++;
+        if (count == len - n)
+        {
+             newhead = curr -> next;
+             tail -> next = head;
+             curr -> next = NULL;
+             head = newhead; 
+        }
+        else
+            curr = curr -> next;
+    }
+    
+    return head;
+    
+}
