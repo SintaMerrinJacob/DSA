@@ -1,0 +1,25 @@
+///////////NAIVE SOLUTION///////////////
+
+bool isPalindrome(Node *head)
+{
+    stack <int> st;
+    Node *curr = head;
+    while(curr != NULL)
+    {
+        st.push( curr -> data );
+        curr = curr -> next;
+    }
+    
+    curr = head;
+    
+    while(curr != NULL)
+    {
+        if(st.top() != curr -> data)
+             return false;
+        
+        st.pop();
+        curr = curr -> next;
+        
+    }
+    return true;
+}
