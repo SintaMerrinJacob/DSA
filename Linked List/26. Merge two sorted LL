@@ -1,0 +1,62 @@
+Node *mergeTwoSortedLinkedLists(Node *h1, Node *h2)
+{
+    // case 1: Both LL are empty
+    if( h1 == NULL && h2 == NULL)
+        return NULL;
+    
+    // case 2: Either of LL is empty
+    if( h1 == NULL)
+        return h2;
+    else if( h2 == NULL )
+        return h1;
+    
+    //case 3: Neither is empty initially
+    
+    Node* newhead = NULL;
+    Node* newtail = NULL;
+    
+    if( h1 -> data < h2 -> data)
+    {
+        newhead = newtail = h1;
+        h1 = h1 -> next;
+    }
+    else
+    {
+         newhead = newtail = h2;
+          h2 = h2 -> next;
+    }
+    
+    while( h1 != NULL && h2 != NULL)
+    {
+        if( h1 -> data < h2 -> data)
+        {
+             newtail -> next = h1;
+             newtail = h1;
+             h1 = h1 -> next;
+        }
+        else
+        {
+            newtail -> next = h2;
+            newtail = h2;
+            h2 = h2 -> next;
+        }
+    }
+    
+    // case 4 : When either became NULL inside loop
+    while( h1 != NULL)
+    {
+             newtail -> next = h1;
+             newtail = h1;
+             h1 = h1 -> next;
+    }
+    
+    while( h2 != NULL )
+    {
+            newtail -> next = h2;
+            newtail = h2;
+            h2 = h2 -> next;
+    }
+    
+    return newhead;
+    
+}
