@@ -1,1 +1,74 @@
-
+Node *evenAfterOdd(Node *head)
+{
+    if( head == NULL || head -> next == NULL)
+        return head;
+    
+    Node* oddhead = NULL , *oddtail = NULL, *evenhead = NULL, *eventail = NULL;
+    
+    if( (head -> data)%2 == 0)
+    {
+           evenhead = head;
+           eventail = head;
+    }
+    else
+    {
+        oddhead = head;
+        oddtail = head;
+   }
+       
+    Node* curr = head -> next;
+    while(curr != NULL)
+    {
+         if( (curr -> data)%2 == 0 )
+         {
+             if(evenhead == NULL)
+             {
+                  evenhead = curr;
+                  eventail = curr;
+             }
+             else
+             {
+                 eventail -> next = curr;
+                eventail = curr;
+             }
+         }
+               
+        else
+        {
+             if(oddhead == NULL)
+             {
+                    oddhead = curr;
+                    oddtail = curr;
+             }
+            else
+            {
+                    oddtail->next = curr;
+                    oddtail = curr;
+            }
+             
+            
+        }
+         
+        
+        curr = curr -> next;
+   }
+    if(oddhead == NULL)
+    {
+         eventail -> next = NULL;
+         return evenhead;
+    }
+        
+    else if(evenhead == NULL)
+    {
+         oddtail -> next = NULL;
+             return oddhead;
+    }
+    else
+    {
+         oddtail -> next = evenhead;
+         eventail -> next = NULL;
+          return oddhead;
+    }
+   
+   
+}
