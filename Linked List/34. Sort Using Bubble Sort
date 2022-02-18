@@ -1,0 +1,40 @@
+int length(Node* head)
+{
+    Node* curr = head;
+    int count = 0;
+    while(curr!=NULL)
+    {
+         count ++;
+        curr = curr -> next;
+    }
+        
+    return count;
+    
+}
+
+Node *bubbleSort(Node *head)
+{
+    if(head == NULL || head -> next ==NULL)
+        return head;
+	
+    
+    
+    
+    for(int i = 0 ; i<length(head) ; i++)
+    {
+        Node *prevNode = NULL;
+        Node *currNode = head;
+       while(currNode -> next != NULL)
+       {
+             if( currNode -> data > currNode -> next -> data)
+                  swap( currNode -> data , currNode -> next ->data);
+             else
+              currNode = currNode -> next;
+           
+       }
+    }    
+     return head;
+}
+    
+    
+   
