@@ -1,0 +1,52 @@
+Given a singly linked list of integers, reverse the nodes of the linked list 'k' at a time and return its modified list.
+
+Node *reverse(Node* head)
+{
+    if( head == NULL || head -> next == NULL)
+        return head;
+    
+    Node* smallans = reverse(head -> next);
+    
+    Node* tail = head -> next;
+    tail -> next = head;
+    head -> next = NULL;
+    
+    return smallans;
+}
+Node *kReverse(Node *head, int k) 
+{
+	 if( head == NULL )
+         return head;
+    
+    Node *h1 = head , *t1 = head;
+    
+    int count = 1;
+    
+    while( count <k && t1 -> next)
+    {
+        count++;
+        t1 = t1 -> next;
+    }
+    
+    Node *h2 = t1 -> next;
+    t1 -> next = NULL;
+    
+    h1 = reverse(h1);
+    
+    t1 = h1;
+    
+    while( count>1)
+    {
+        t1 = t1 -> next;
+        count -- ;
+    }
+    
+    h2 = kReverse(h2,k);
+    t1->next = h2;
+    
+    
+    
+    
+    return h1;
+    
+}
