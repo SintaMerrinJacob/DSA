@@ -1,0 +1,54 @@
+
+You have been given a singly linked list of integers along with two integers, 'i,' and 'j.' Swap the nodes that are present at the 'i-th' and 'j-th' positions.
+
+Remember, the nodes themselves must be swapped and not the datas.
+
+
+
+Node *swapNodes(Node *head, int i, int j)
+{
+    //case 1: Head is NULL or only single element
+    if(head == NULL || head -> next == NULL)
+        return head;
+     // when the nodes to be swapped are same
+    if ( i==j )
+        return head;
+    
+	Node   *iprev = NULL   ,   *inode = NULL ;
+    Node   *jprev = NULL   ,   *jnode = NULL ;
+    int pos = 0;
+    Node *curr = head;
+    
+    while( pos < i -1 && curr != NULL )
+           {
+               pos++;
+               curr = curr -> next;
+           }
+          iprev = curr;
+          inode = curr -> next;
+         
+        
+        pos = 0;
+        curr = head;
+        while( pos < j -1 && curr != NULL )
+           {
+               pos++;
+               curr = curr -> next;
+           }
+          jprev = curr;
+          jnode = curr -> next;
+          
+        
+        iprev -> next = jnode;
+        jprev -> next = inode;
+        Node * temp = inode -> next;
+        inode -> next = jnode -> next;
+        jnode -> next = temp;
+        
+        
+        
+        
+        
+    
+    return head;
+}
