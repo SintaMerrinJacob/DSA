@@ -1,0 +1,61 @@
+You have been given a singly linked list of integers along with two integers, 'M,' and 'N.' 
+Traverse the linked list such that you retain the 'M' nodes, then delete the next 'N' nodes. Continue the same until the end of the linked list.
+To put it in other words, in the given linked list, you need to delete N nodes after every M nodes.
+
+INPUT
+1 2 3 4 5 6 7 8 -1
+M=2  N=2
+
+OUTPUT
+1 2 5 6
+
+Node *skipMdeleteN(Node *head, int m, int n)
+{
+    ////////////case 1: Head is NULL///////////////
+    if( head == NULL)
+      return head;
+    
+    //////// case 2: n=0 , return LL as such////////////
+      if( n==0)
+          return head;
+   
+   ////////case 3 : m = 0 , delete all elements//////////////
+      if(m==0)
+       return NULL;
+    
+    ///////////// case 4 : after M nodes , delete N nodes/////////////
+    Node* curr = head;
+    int mcount = 0 , ncount = 0;
+    while( curr != NULL)
+    {
+        while( mcount<m-1)
+        {
+            mcount++;
+            curr = curr -> next;
+        }
+        mcount = 0;
+        if(curr == NULL)
+            return head;
+        else
+        {
+            Node* rem = curr -> next;
+            ncount = 0;
+            while( ncount < n && rem != NULL)
+            {
+                ncount++;
+                rem = rem -> next;
+                if( rem == NULL)
+                {
+                    curr -> next = NULL;
+                    return head;
+                }
+                    
+            }
+            curr -> next = rem;
+            curr = rem;
+            
+        }
+        
+    }
+    return head;
+}
