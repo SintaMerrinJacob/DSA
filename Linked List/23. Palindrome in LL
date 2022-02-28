@@ -1,4 +1,29 @@
-///////////NAIVE SOLUTION///////////////
+///////////   1   NAIVE SOLUTION       TC: O(n)      SC:0(n)        ///////////////
+bool isPalindrome(Node *head)
+    {
+        if(head -> next == NULL)
+        return true;
+        vector <int> arr;
+        Node* curr = head;
+        int i = 0;
+        while( curr != NULL)
+        {
+            arr.push_back( curr -> data );
+            curr = curr  -> next;
+        }
+        int j = i-1;
+        i = 0;
+        while( i<=j)
+        {
+            if(arr[i++] != arr[j--])
+             return false;
+        }
+        return true;
+    }
+
+
+
+///////////   2   NAIVE SOLUTION      TC: O(n)      SC:0(n)        ///////////////
 
 bool isPalindrome(Node *head)
 {
@@ -23,3 +48,71 @@ bool isPalindrome(Node *head)
     }
     return true;
 }
+
+
+///////////////  3  OPTIMAL SOLUTION    TC: 0(N)     SC:O(N) /////////////////////
+class Solution{
+  private : 
+  Node* middle(Node* head)
+  {
+      if(head -> next == NULL)
+          return head;
+       Node* slow = head;
+       Node* fast = head -> next;
+       while( fast != NULL && fast -> next != NULL)
+       {
+           fast = fast -> next -> next;
+           slow = slow -> next;
+       }
+       return slow;
+  }
+  
+  Node* reverse( Node* head)
+  {
+      
+      if(head == NULL || head -> next == NULL)
+       return head;
+       
+      Node* curr = head;
+      Node* prev = NULL;
+      Node* n = NULL;
+      
+      while( curr != NULL)
+      {
+          n = curr -> next;
+          curr -> next = prev;
+          prev = curr;
+          curr = n;
+      }
+      return prev;
+  }
+  
+  public:
+    //Function to check whether the list is a palindrome.
+    bool isPalindrome(Node *head)
+    {
+        
+        if( head == NULL || head -> next == NULL)
+               return true;
+        Node* mid = middle(head);
+        mid -> next = reverse(mid -> next);
+        Node* temp1 = head;
+        Node* temp2 = mid -> next;
+        while( temp1 != mid ->next && temp2 != NULL)
+        {
+            if( temp1 -> data != temp2 -> data)
+            {
+                mid -> next = reverse(mid -> next);
+                return false;
+                
+            }
+              
+              
+             temp1 = temp1 -> next;
+             temp2 = temp2 -> next;
+        }
+        mid -> next = reverse(mid -> next);
+        
+        return true;
+    }
+};
