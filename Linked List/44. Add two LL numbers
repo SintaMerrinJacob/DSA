@@ -1,0 +1,118 @@
+class Solution 
+{
+private : 
+    vector<int> addArrays( vector<int>arr1 , vector<int>arr2 )
+    {
+        int size1 = arr1.size();
+        int size2 = arr2.size();
+        
+        vector<int>ans;
+        
+        int i = size1 - 1;
+        int j = size2 - 1;
+        
+        
+        
+        int carry = 0;
+        int sum =  0;
+        while( i>= 0 && j>=0 )
+        {
+             sum = arr1[i] + arr2[j] + carry;
+             
+             if( sum <10 )
+             {
+                 carry = 0;
+                 ans.push_back(sum);
+                 i--;
+                 j--;
+             }
+            else
+            {
+                 carry = 1;
+                 ans.push_back(sum%10);
+                 i--;
+                 j--;
+            }
+        }
+        
+        while( i>=0 )
+        {
+            ans.push_back(arr1[i]);
+            i--;
+        }
+        
+        while( j>=0 )
+        {
+            ans.push_back(arr2[j]);
+            j--;
+        }
+        
+        if( carry == 1)
+            ans.push_back(1);
+        
+        return ans;
+        
+    }
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+    {
+        vector<int>arr1;
+        vector<int>arr2;
+        
+        ListNode* temp = l1;
+       
+        while( temp != NULL)
+        {
+            arr1.push_back(temp -> val);
+            temp = temp -> next;
+        }
+        
+        temp = l2;
+        while( temp != NULL)
+        {
+            arr2.push_back(temp -> val);
+            temp = temp -> next;
+        }
+        
+        int s1 = arr1.size();
+        int s2 = arr2.size();
+        
+        if( s1 < s2)
+        {   int diff = s2 - s1;
+            while( diff>0)
+            {
+                arr1.push_back(0);
+                diff -- ;
+            }
+        }
+        else if( s2 < s1)
+        {
+            int diff = s1 - s2;
+            while( diff>0)
+            {
+                arr2.push_back(0);
+                diff -- ;
+            }
+        }
+        
+        reverse( arr1.begin() , arr1.end());
+        reverse( arr2.begin() , arr2.end());
+        
+         vector <int> ans = addArrays( arr1 , arr2 );  
+         reverse( ans.begin() , ans.end());
+         int k = ans.size() - 1;
+         ListNode *newLL = new ListNode( ans[k]);
+         k--;
+         
+         temp = newLL;
+          while(k>=0)
+          {
+              ListNode* newnode = new ListNode( ans[k] );
+              k--;
+              temp -> next = newnode;
+              temp = newnode;
+          }
+         return newLL;
+        
+    }
+};
