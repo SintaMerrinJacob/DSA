@@ -50,7 +50,7 @@ bool isPalindrome(Node *head)
 }
 
 
-///////////////  3  OPTIMAL SOLUTION    TC: 0(N)     SC:O(N) /////////////////////
+///////////////  3  OPTIMAL SOLUTION    TC: 0(N)     SC:O(1) /////////////////////
 class Solution{
   private : 
   Node* middle(Node* head)
