@@ -1,1 +1,103 @@
+class Stack
+{
+   private : 
+   int *data;
+   int nextIndex;
+   int capacity;
+   public:
+   Stack(int n)
+   {
+	   data = new int [n];
+	   nextIndex = 0;
+	   capacity = n;
+   }
+    void push( int x)
+	{
+		 if( size() == capacity)
+		 cout<<"Overflow"<<endl;
+		 else{
+             data[nextIndex] = x;
+		     nextIndex++;
+		 }
+         
 
+	}
+
+	void pop()
+	{
+		if(size()==0)
+		 cout<<"Underflow"<<endl;
+		 else
+         nextIndex--;
+	}
+
+	int topelement()
+	{
+		if(nextIndex == -1 )
+		{
+            cout<<"Underflow"<<endl;
+			return -1;
+		}
+		 
+		else
+         return data[nextIndex - 1];
+	}
+
+    int size()
+	{
+       return nextIndex;
+	}
+
+	bool isEmpty()
+	{
+       if(nextIndex == -1)
+	     return true;
+		else
+		 return false;
+	}
+
+	void print()
+	{   int i = nextIndex-1;
+		while( i>=0)
+		{
+			int element = topelement();
+			cout<<element<<" ";
+			pop();
+			i--;
+		}
+		cout<<endl;
+	}
+};
+
+
+
+
+int main()
+{
+	int n;
+	cout<<"Enter the number of elements to be pushed into stack "<<endl;
+    cin >> n;
+	Stack s(n);
+	s.push(10);
+	s.push(5);
+	s.push(14);
+	s.push(78);
+	s.push(29);
+
+
+	
+	//s.print();
+	if(s.isEmpty())
+	 cout<<"Stack is Empty "<<endl;
+	else
+	 cout<<"Stack is not Empty"<<endl;
+	cout<<"Top element of stack is "<<s.topelement()<<endl;
+	s.pop();
+	cout<<"Top element of stack is "<<s.topelement()<<endl;
+	cout<<"Size of stack is "<<s.size()<<endl;
+	s.print();
+	cout<<"Top element of stack is "<<s.topelement()<<endl;
+
+	
+	return 0;
+}
