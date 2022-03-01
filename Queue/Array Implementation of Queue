@@ -1,0 +1,57 @@
+class Queue
+{
+   private :
+    int *data;
+	int capacity;
+	int nextIndex;
+	int frontIndex;
+
+  public:
+  Queue()
+  {
+	  data = new int[10];
+	  //capacity = 5;
+	  nextIndex = 0;
+	  frontIndex = 0;
+  }
+
+  void enqueue( int x)
+  {
+       data[nextIndex] = x;
+	   nextIndex++;
+  } 
+
+  void dequeue()
+  {
+    if(frontIndex >= nextIndex)
+	 cout<<"UnderFlow"<<endl;
+
+	 frontIndex++;
+  }
+
+  int front()
+  {
+          return data[frontIndex];
+  }
+
+  int size()
+  {
+        return nextIndex-frontIndex;
+  }
+
+  bool isEmpty()
+  {
+        if( size() == 0)
+		 return true;
+		 else
+		 return false;
+  }
+
+  void print()
+  {
+	  for(int i = frontIndex ; i<nextIndex ; i++)
+	    cout<<data[i]<<" ";
+
+	  cout<<endl;
+  }
+};
