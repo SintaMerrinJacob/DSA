@@ -43,6 +43,12 @@ class Queue
 	frontIndex = (frontIndex+1)%capacity;
 	size--;
 	
+	if(size == 0)
+	{
+	     nextIndex = 0;
+	  frontIndex = 0;
+	}
+	
  }
 
   void getfront()
