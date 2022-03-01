@@ -1,82 +1,67 @@
-class Node
-{
-	public:
-	 int val;
-	 Node* next;
+class Node {
+   public:
+    int data;
+    Node *next;
 
-	 Node(int d)
-	 {
-        val = d;
-		next = NULL;
-	 }
+    Node(int data) {
+        this->data = data;
+        next = NULL;
+    }
 };
 
-class Stack
-{
-   private : 
-   
-   Node* head;
-   int size;
-   
+class Stack 
+ {
+	// Define the data members
+    Node* head;
+    int size;
    public:
-   
-   Stack()
-   {
-	   head = NULL;
-	   size = 0;
-   }
-    void push( int x)
-	{
-		 Node* temp = new Node(x);
-		 temp -> next = head;
-		 head = temp;
-		 size++;
-	}
+    Stack() {
+        // Implement the Constructor
+        head = NULL;
+        size = 0;
+    }
 
-	void pop()
-	{
-		if(head == NULL)
-		{
-           cout<<"UnderFlow"<<endl;
-		   return;
-		}
-		  
-		
-		Node* temp = head;
-		head = head -> next;
-		delete temp;
-		size --;
-		cout<<"Element popped" << endl;
-	}
+	/*----------------- Public Functions of Stack -----------------*/
 
-	int topelement()
-	{
-		return head -> val;
-	}
+    int getSize() {
+        // Implement the getSize() function
+        return size;
+    }
 
-    int total()
-	{
-       return size;
-	}
+    bool isEmpty() {
+        // Implement the isEmpty() function
+        if(head == NULL)
+            return true;
+        else
+            return false;
+    }
 
-	bool isEmpty()
-	{
-       if(head == NULL)
-	    return true;
-		else
-		return false;
-	}
+    void push(int element) {
+        // Implement the push() function
+        Node* temp = new Node(element);
+        temp -> next = head;
+        head = temp;
+        size++;
+    }
 
-	void print()
-	{   
-         Node* temp = head;
-		 while(temp != NULL)
-		  {
-			  cout << temp -> val<<" ";
-			  temp = temp -> next;
-		  }
-		  cout<<endl;
-	}
+    int pop() {
+        // Implement the pop() function
+        if(head == NULL)
+            return -1;
+        int res = head -> data;
+        Node*temp = head;
+        head = head -> next;
+        delete temp;
+        size--;
+        return res;
+    }
+
+    int top() {
+        // Implement the top() function
+        if(head == NULL)
+            return -1;
+        return head -> data;
+    }
 };
 
 
