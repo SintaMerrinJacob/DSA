@@ -1,1 +1,101 @@
+class Node
+{
+	public:
+	 int val;
+	 Node* next;
 
+	 Node(int d)
+	 {
+        val = d;
+		next = NULL;
+	 }
+};
+
+class Stack
+{
+   private : 
+   
+   Node* head;
+   int size;
+   
+   public:
+   
+   Stack()
+   {
+	   head = NULL;
+	   size = 0;
+   }
+    void push( int x)
+	{
+		 Node* temp = new Node(x);
+		 temp -> next = head;
+		 head = temp;
+		 size++;
+	}
+
+	void pop()
+	{
+		if(head == NULL)
+		{
+           cout<<"UnderFlow"<<endl;
+		   return;
+		}
+		  
+		
+		Node* temp = head;
+		head = head -> next;
+		delete temp;
+		size --;
+		cout<<"Element popped" << endl;
+	}
+
+	int topelement()
+	{
+		return head -> val;
+	}
+
+    int total()
+	{
+       return size;
+	}
+
+	bool isEmpty()
+	{
+       if(head == NULL)
+	    return true;
+		else
+		return false;
+	}
+
+	void print()
+	{   
+         Node* temp = head;
+		 while(temp != NULL)
+		  {
+			  cout << temp -> val<<" ";
+			  temp = temp -> next;
+		  }
+		  cout<<endl;
+	}
+};
+
+
+
+
+int main()
+{
+	
+	Stack s;
+	s.push(10);
+	s.push(15);
+	s.push(20);
+	s.print();
+	s.pop();
+	s.print();
+	cout<<s.total()<<endl;
+	cout<<s.topelement()<<endl;
+	cout<<s.isEmpty()<<endl;
+
+	
+	return 0;
+}
