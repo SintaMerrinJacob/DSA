@@ -1,0 +1,58 @@
+class Queue {
+	// Define the data members
+    Node *f , *rear;
+    int size;
+   public:
+    Queue() {
+		// Implement the Constructor
+        f = rear = NULL;
+        size = 0;
+	}
+	
+	/*----------------- Public Functions of Stack -----------------*/
+
+	int getSize() {
+		// Implement the getSize() function
+        return size;
+	}
+
+    bool isEmpty() {
+		// Implement the isEmpty() function
+        return (size==0);
+	}
+
+    void enqueue(int data) {
+		// Implement the enqueue() function
+        Node* temp = new Node(data);
+        size++;
+        if(f == NULL)
+        {
+             f = rear = temp;
+             return;
+        }
+        
+        rear -> next = temp;
+        rear = temp;
+            
+	}
+
+    int dequeue() {
+        // Implement the dequeue() function
+        if(f == nullptr)
+            return -1;
+        size--;
+        
+        Node* temp = f;
+        int res = f->data;
+        f = f -> next;
+        delete temp;
+        return res;
+    }
+
+    int front() {
+        // Implement the front() function
+        if(f == NULL)
+            return -1;
+        return f -> data;
+    }
+};
