@@ -5,53 +5,76 @@ class Queue
 	int capacity;
 	int nextIndex;
 	int frontIndex;
+	int size;
 
   public:
   Queue()
   {
-	  data = new int[10];
-	  //capacity = 5;
+	  data = new int[5];
+	  capacity = 5;
 	  nextIndex = 0;
 	  frontIndex = 0;
+	  size = 0;
   }
 
   void enqueue( int x)
   {
-       data[nextIndex] = x;
-	   nextIndex++;
+       if(isFull())
+       {
+           cout<<"Overflow"<<endl;
+           return;
+       }
+	     
+		
+		data[nextIndex] = x;
+		nextIndex = (nextIndex+1)%capacity;
+		size++;
   } 
 
   void dequeue()
   {
-    if(frontIndex >= nextIndex)
-	 cout<<"UnderFlow"<<endl;
+     if( isEmpty())
+     {
+          cout<<"Underflow"<<endl;
+          return;
+     }
+	  
 
-	 frontIndex++;
+	frontIndex = (frontIndex+1)%capacity;
+	size--;
+	
+ }
+
+  void getfront()
+  {
+      if(isEmpty())
+      {
+          return;
+      }
+    cout<< data[frontIndex]<<endl;
   }
 
-  int front()
+  void getRear()
   {
-          return data[frontIndex];
+        cout<<data[(frontIndex+size-1)%capacity]<<endl;
   }
 
-  int size()
+  void getsize()
   {
-        return nextIndex-frontIndex;
+        cout<<"Size is "<< size<<endl;
   }
 
   bool isEmpty()
   {
-        if( size() == 0)
-		 return true;
-		 else
-		 return false;
+        return (size == 0);
+		  
   }
-
-  void print()
+  bool isFull()
   {
-	  for(int i = frontIndex ; i<nextIndex ; i++)
-	    cout<<data[i]<<" ";
-
-	  cout<<endl;
+	  return( capacity == size);
+	    
   }
+
+  
 };
+
