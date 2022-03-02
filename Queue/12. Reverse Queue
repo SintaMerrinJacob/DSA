@@ -1,0 +1,10 @@
+void reverseQueue(queue<int> &input) 
+{
+   if( input.size() == true)
+       return;
+    
+    int temp = input.front();
+    input.pop();
+    reverseQueue(input);
+    input.push(temp);
+}
