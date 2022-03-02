@@ -1,0 +1,27 @@
+//////////////// TC : O(N^2)     SC : O(N) //////////////////////////
+int* stockSpan(int *input, int size)  
+{
+	int *ans = new int[size];   // array to return the ans containing the stock span
+    int CountOfConsecutiveLess = 1; 
+   
+    int i = size-1 , j = 1;  // start from end of the array;
+    int curval = input[i-j] ;
+    while(i >= 0)
+    {
+        while( curval < input[i]  && i-j >= 0)
+        {
+            CountOfConsecutiveLess ++;
+            j++;
+            curval =   input[i - j];
+        }
+        
+       ans[i] =  CountOfConsecutiveLess;
+        CountOfConsecutiveLess = 1;
+        i--;
+        j=1;
+        curval =  input[i - j];
+        
+    }
+    
+    return ans;
+}
