@@ -1,0 +1,28 @@
+////////////////////////// RECURSIVE SOLUTION   TC : O(N)   SC : O(N) //////////////////////
+void reverseStack(stack<int> &input, stack<int> &extra) 
+{
+    //base condition
+    if(input.empty() == true)
+        return;
+    
+    int temp = input.top();
+    input.pop();
+    reverseStack(input,extra);
+    
+    while( input.empty() == false)
+    {
+        int x = input.top();
+        extra.push(x);
+        input.pop();
+    }
+    
+    input.push(temp);
+    while(extra.empty() == false)
+    {
+        int x = extra.top();
+        input.push(x);
+        extra.pop();
+    }
+    
+    
+}
