@@ -1,1 +1,39 @@
-
+int countBracketReversals(string input) {
+    
+   int len = input.size();
+	
+    if(len%2 ==1 )
+        return -1;
+    
+    stack<char>s;
+    
+    for( char c : input)
+    {
+        if( c == '}' &&  !s.empty() )
+        {
+            if(s.top() == '{')
+               s.pop();
+          else
+            s.push(c);
+      }
+        
+    else
+        s.push(c);
+    
+}
+    
+    int reduced_len = s.size();
+    
+    int n = 0; ////keeps track of opening brace at end
+    
+    while( !s.empty()  && s.top() == '{')
+    {
+        n++;
+        s.pop();
+    }
+    
+    return  reduced_len/2 + n%2;
+   
+    
+    
+}
