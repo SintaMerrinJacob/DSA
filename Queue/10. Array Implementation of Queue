@@ -80,7 +80,7 @@ class Queue
   {
         cout<<"Size is "<< size<<endl;
   }
-
+ 
   bool isEmpty()
   {
         return (size == 0);
