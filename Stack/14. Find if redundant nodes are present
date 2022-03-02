@@ -1,0 +1,30 @@
+bool checkRedundantBrackets(string str)
+{
+    stack<char>s;
+    
+    for( char c : str)
+    {
+        if( c == ')' )
+        {
+            char top = s.top();
+            s.pop();
+            int elementInside = 0;
+            
+            while( top != '(' )
+            {
+                   elementInside++;
+                   top = s.top();
+                   s.pop();
+                   
+            }
+            
+            if(elementInside <= 1)
+                return true;
+        }
+        
+        else
+            s.push(c);
+    }
+    
+    return false;
+}
