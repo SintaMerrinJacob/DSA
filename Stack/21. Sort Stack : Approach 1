@@ -1,1 +1,29 @@
 
+void sortStack(stack<int> &s)
+{
+     stack<int>tmpstack;
+     
+     // Below copying was necessary when stack refernce is passes, as we have to make change in the,input stack, if return type was stack
+     // we could return the changes made in temporary stack as such
+    while(!s.empty())
+    {
+        tmpstack.push(s.top());
+        s.pop();
+    }
+    
+   while( !tmpstack.empty())
+   {
+       int top = tmpstack.top();
+      tmpstack.pop();
+       
+       while( !s.empty()  && top < s.top())
+       {
+           tmpstack.push(s.top());
+           s.pop();
+       }
+       s.push(top);
+   }
+   
+    
+   
+}
