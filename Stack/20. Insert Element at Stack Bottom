@@ -1,0 +1,15 @@
+stack<int> pushAtBottom(stack<int>& s, int x) 
+{
+    //base case 
+    if( s.empty() == true)
+    {
+         s.push(x);
+        return s;
+    }
+        
+        int temp = s.top();
+        s.pop();
+        pushAtBottom( s,  x);
+        s.push(temp);
+        return s;
+ }
