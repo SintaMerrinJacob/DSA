@@ -1,1 +1,34 @@
-
+void sortedInsert( stack<int> &s , int x )
+{
+    if(s.empty() || s.top() <= x)
+    {
+        s.push(x);
+        return;
+    }
+    int temp = s.top();
+    s.pop();
+    sortedInsert(s,x);
+    s.push(temp);
+}
+void sortStack(stack<int> &s)
+{
+    const int INT_MIN = -2147483647 - 1;
+	if(s.empty() )
+    {
+        return ;
+     }
+    int top = s.top();
+    s.pop();
+    
+    sortStack(s);
+    
+    if( !s.empty() && top < s.top())
+    {
+         sortedInsert(s, top);
+    }
+    else
+    {
+          s.push(top);
+    }
+   
+}
