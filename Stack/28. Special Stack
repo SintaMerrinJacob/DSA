@@ -1,3 +1,62 @@
+//////////////////////////////////// BRUTE FORCE APPROACH ///////////////////////////////////
+class MinStack 
+{
+    stack<int>s;
+    stack<int>temp;
+    
+    
+public:
+    
+    
+    void push(int val) 
+    {
+        if(s.empty())
+        {
+            s.push(val);
+            temp.push(val);
+        }
+        else
+        {
+           s.push(val);
+           int y = temp.top();
+           if( val < y)
+           {
+               temp.push(val);
+           }
+            else
+                temp.push(y);
+        }
+        
+        
+    }
+    
+    void pop() 
+    {
+         if(s.empty())
+             return;
+        
+        s.pop();
+        temp.pop();
+    }
+    
+    int top() 
+    {
+        if( s.empty())
+            return -1;
+        
+        return s.top();
+    }
+    
+    int getMin() 
+    {
+         if( s.empty())
+            return -1;
+        
+        return temp.top();
+    }
+};
+
+/////////////////////////////////////////// OPTIMAL APPROACH /////////////////////////////////
 #include<stack>
 class SpecialStack {
     
