@@ -1,1 +1,73 @@
+#include<stack>
+class SpecialStack {
+    
+    stack<int>s;
+    int minval;
+    
+    public:
+        
+    void push(int data) 
+    {
+         if(s.empty())
+         {
+             s.push(data);
+             minval = data;
+         }
+        else
+        {
+            if( data > minval )
+                s.push(data);
+            else
+            {
+                s.push(2*data - minval);
+                minval = data;
+            }
+        }
+    }
 
+    int pop() 
+    {
+         if( s.empty())
+             return -1;
+        
+        int curr = s.top();
+        s.pop();
+        
+        if( curr > minval)
+            return curr;
+        else
+        {
+            int prevMin = minval;
+            minval = 2*minval - curr;
+            return prevMin;
+        }
+            
+    }
+
+    int top() 
+    {
+        if( s.empty())
+            return -1;
+        
+        int curr = s.top();
+        if( curr < minval)
+        {
+             return minval;
+        }
+        else
+        {
+             return curr;
+        }
+    }
+
+    bool isEmpty() {
+        return s.empty();
+    }
+
+    int getMin() {
+       if(s.empty())
+           return -1;
+        else
+            return minval;
+    }  
+};
