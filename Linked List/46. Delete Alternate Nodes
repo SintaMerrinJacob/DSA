@@ -1,0 +1,16 @@
+void deleteAlternateNodes(Node *head)
+{
+    if(head == NULL || head -> next == NULL)
+      return ;
+      
+      Node*temp = head;
+      
+      while( temp != NULL && temp ->next != NULL)
+      {
+          Node*a = temp -> next;
+          temp -> next = a->next;
+          a->next = NULL;
+          delete a ;
+          temp = temp -> next;
+      }
+}
