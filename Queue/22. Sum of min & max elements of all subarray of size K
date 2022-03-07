@@ -1,0 +1,44 @@
+long long sumOfMaxAndMin(vector<int> &nums, int n, int k) 
+{
+	long long sum = 0;
+    deque< int>maxi(k);
+    deque<int>mini(k);
+    
+    int i = 0;
+    for( i = 0; i<k ; i++)
+    {
+        while( !maxi.empty() && nums[maxi.back()] <= nums[i] )
+            maxi.pop_back();
+       
+        while( !mini.empty() && nums[mini.back()] >= nums[i] )
+            mini.pop_back();
+        
+        maxi.push_back(i);
+        mini.push_back(i);
+        
+    }
+    
+    for( ; i<n ; i++)
+    {
+        sum += nums[ maxi.front()] + nums[mini.front()];
+        
+         while( !maxi.empty()  && maxi.front() <= i-k )
+            maxi.pop_front();
+         while( !mini.empty()  && mini.front() <= i-k )
+            mini.pop_front();
+             
+          
+        while( !maxi.empty() && nums[maxi.back() ]<= nums[i] )
+            maxi.pop_back();
+       while( !mini.empty() && nums[mini.back()] >= nums[i] )
+            mini.pop_back();
+        
+        maxi.push_back(i);
+        mini.push_back(i);
+    }
+    
+    sum += nums[ maxi.front()] + nums[mini.front()];
+    
+    return sum;
+    
+}
