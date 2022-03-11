@@ -1,0 +1,15 @@
+TreeNode<int>* maxDataNode(TreeNode<int>* root) 
+{
+    if( root == NULL )
+        return NULL;
+    
+    TreeNode<int>* maximum = root;
+    
+    for(int i = 0 ; i < root -> children.size() ; i++)
+    {
+         TreeNode<int>* child = maxDataNode( root -> children[i]);
+        if( child -> data > maximum -> data)
+            maximum = child;
+    }
+   return maximum;
+}
