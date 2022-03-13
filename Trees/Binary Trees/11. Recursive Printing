@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class BinaryTreeNode
+{
+    public :
+     int data;
+     BinaryTreeNode* left;
+     BinaryTreeNode* right;
+     
+     
+     BinaryTreeNode(int d)
+     {
+         this -> data = d;
+         left = NULL;
+         right = NULL;
+     }
+     
+     ~BinaryTreeNode()
+     {
+         delete left;
+         delete right;
+     }
+};
+
+void printBinaryTree( BinaryTreeNode* root)
+{
+    if(root == NULL)
+      {
+          return;
+      }
+
+    cout << root -> data<<" : ";
+    if( root -> left != NULL)
+    {
+        cout << " L - "<<root -> left -> data;
+    }
+    if( root -> right != NULL)
+    {
+        cout << "   R - "<<root -> right -> data;
+    }
+    cout<<endl;
+    printBinaryTree( root -> left);
+    printBinaryTree( root -> right);
+
+}
+
+BinaryTreeNode* takeInput()
+{
+    int rootdata;
+    cout<<"Enter data"<<endl;
+    cin>>rootdata;
+    if( rootdata == -1)
+     return NULL;
+    
+    BinaryTreeNode* root = new BinaryTreeNode(rootdata);
+    BinaryTreeNode* leftchild = takeInput();
+    BinaryTreeNode* rightchild = takeInput();
+    root -> left = leftchild;
+    root -> right = rightchild;
+    return root;
+
+}
+
+int main()
+{
+   
+   BinaryTreeNode* root = takeInput();
+   printBinaryTree(root);
+   
+   return 0;
+}
