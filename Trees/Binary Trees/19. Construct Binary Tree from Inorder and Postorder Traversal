@@ -1,0 +1,44 @@
+BinaryTreeNode<int>* solve( int *postorder ,   int poststart ,  int postend ,  int *inorder ,  int instart , int inend  )
+{
+    if( poststart > postend || instart > inend)
+        return NULL;
+    
+    int rootval = postorder[postend];
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootval);
+    
+    int k = 0;
+    for( int i = instart ; i<=inend ; i++)
+    {
+        if( inorder [i] == rootval)
+        {
+            k = i;
+            break;
+        }
+    }
+    
+    int lpoststart = poststart;
+    int linstart      =  instart;
+    int linend        = k-1;
+    int lpostend    =  linend - linstart + lpoststart;
+    
+    int rpoststart =  lpostend  + 1;
+    int rpostend   =  postend - 1;
+    int rinstart    =  k+1;
+    int rinend       =  inend;
+   
+    root -> left =  solve(postorder , lpoststart , lpostend , inorder , linstart , linend);
+    root -> right = solve(postorder , rpoststart , rpostend , inorder , rinstart , rinend);
+    
+    return root;
+}
+
+BinaryTreeNode<int>* buildTree(int *postorder, int postLength, int *inorder, int inLength) 
+{
+    int poststart = 0;
+    int postend = postLength - 1;
+    int instart = 0 ;
+    int inend = inLength - 1;
+    
+    return solve(postorder , poststart , postend , inorder , instart , inend);
+        
+}
