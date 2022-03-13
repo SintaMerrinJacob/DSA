@@ -1,0 +1,57 @@
+Given a generic tree, find and return the node with second largest value in given tree.
+Note: Return NULL if no node with required value is present.
+
+void getLargest(TreeNode<int>* root , TreeNode<int>* &largest , int &maxval)
+{
+    // update largest
+    if( root -> data > maxval)
+    {
+        largest = root;
+        maxval =   root -> data;
+    }
+    
+    //call for remaining tree
+    
+    for( int i = 0 ; i < root -> children.size() ; i++)
+    {
+        getLargest(root -> children[i] , largest , maxval);
+    }
+        
+      
+        
+}
+
+void  secLargestUtil( TreeNode<int>* root , TreeNode<int>* largestNode , TreeNode<int>* &seclargest ,  int &secmax)
+{
+    if( root -> data > secmax && root -> data < largestNode -> data)
+    {
+        seclargest = root;
+        secmax =   root -> data;
+    }
+    
+    for( int i = 0 ; i < root -> children.size() ; i++)
+    {
+         secLargestUtil(root -> children[i] , largestNode , seclargest , secmax);
+    }
+    
+}
+
+TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) 
+{
+   if(root == NULL)
+       return NULL;
+    
+    TreeNode<int> *largestNode = root ;
+    int maxval = root -> data ;
+    getLargest(root , largestNode , maxval);
+    
+    
+    TreeNode<int> *seclargest = NULL;
+     int secmax = INT_MIN;
+    
+    secLargestUtil(root , largestNode , seclargest , secmax);
+    
+    return seclargest;
+    
+    
+}
