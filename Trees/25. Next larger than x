@@ -1,0 +1,40 @@
+Given a generic tree and an integer n. Find and return the node with next larger element in the tree i.e. find a node with value just greater than n.
+
+
+void getLargeUtil( TreeNode<int>* root , int x , int &greatval , TreeNode<int>* &ans)
+{
+    if( root -> data > x && greatval == x)
+    {
+        ans = root;
+        greatval = root -> data;
+    }
+        
+     else if( root -> data > x && root -> data < greatval )
+     {
+          ans = root;
+         greatval = root -> data;
+    }
+    
+    for( int i = 0 ; i < root -> children.size() ; i++ )
+    {
+         getLargeUtil(root -> children[i] , x , greatval , ans);
+    }
+        
+   
+}
+
+
+TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x)
+{
+    
+     if( root == NULL)
+        return NULL;
+    
+    TreeNode<int>* ans = NULL;
+    
+     int greatval = x;
+   
+    getLargeUtil(root , x , greatval , ans);
+    
+    return ans;
+}
