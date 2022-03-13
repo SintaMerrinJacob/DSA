@@ -1,1 +1,9 @@
+int numofNodes( BinaryTreeNode* root )
+{
+    if( root == NULL )
+    {
+        return 0;
+    }
 
+    return 1 + numofNodes( root -> left ) + numofNodes( root -> right );
+}
