@@ -1,0 +1,35 @@
+Given a generic tree, find and return the node for which sum of its data and data of all its child nodes is maximum. 
+In the sum, data of the node and data of its immediate child nodes has to be taken.
+
+
+void maxsumUtil( TreeNode<int>* root , TreeNode<int>* &ans, int &maxsum)
+{
+    if(root == NULL)
+        return;
+    
+    int cursum = root -> data;
+    
+    for( int i = 0 ; i < root -> children.size() ; i++ )
+    {
+        cursum += root -> children[i] -> data;
+        maxsumUtil( root -> children[i], ans , maxsum);
+    }
+    
+    if(cursum>maxsum)
+    {
+        ans = root;
+        maxsum = cursum;
+    }
+    return;
+}
+
+
+TreeNode<int>* maxSumNode(TreeNode<int>* root) 
+{
+    TreeNode<int>* ans;
+    int maxsum = 0;
+    
+    maxsumUtil(root, ans, maxsum);
+    
+    return ans;
+}
