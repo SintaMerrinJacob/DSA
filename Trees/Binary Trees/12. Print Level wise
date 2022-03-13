@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class BinaryTreeNode
+{
+    public :
+     int data;
+     BinaryTreeNode* left;
+     BinaryTreeNode* right;
+     
+     
+     BinaryTreeNode(int d)
+     {
+         this -> data = d;
+         left = NULL;
+         right = NULL;
+     }
+     
+     ~BinaryTreeNode()
+     {
+         delete left;
+         delete right;
+     }
+};
+
+
+void printLevelwise( BinaryTreeNode* root)
+{
+    if(root == NULL)
+      return ;
+
+    queue<BinaryTreeNode*> q;
+    q.push(root);
+
+    while ( !q.empty())
+    {
+        BinaryTreeNode* front = q.front();
+        q.pop();
+        cout << front -> data <<" : ";
+        if( front -> left != NULL)
+        {
+            q.push(front -> left);
+            cout << " L - "<<front -> left -> data;
+        }
+        if( front -> right != NULL)
+        {
+            q.push(front -> right);
+            cout << "   R - "<<front -> right -> data;
+
+
+        }
+        cout<<endl;
+    }
+}
+
+
+BinaryTreeNode* takeInputLevelWise()
+{
+    int rootdata;
+    cout<<"Enter root data"<<endl;
+    cin >> rootdata;
+    if( rootdata == -1)
+    {
+        return NULL;
+    }
+    BinaryTreeNode* root = new BinaryTreeNode(rootdata);
+    queue<BinaryTreeNode*>q;
+    q.push(root);
+
+    while( !q.empty())
+    {
+        BinaryTreeNode* front = q.front();
+        q.pop();
+        
+        cout<<"Enter the left child of "<<front->data<<endl;
+        int leftChilddata;
+        cin>>leftChilddata;
+        if(leftChilddata != -1)
+        {
+            BinaryTreeNode* leftchild = new BinaryTreeNode( leftChilddata );
+            front -> left = leftchild;
+            q.push(leftchild);
+        }
+        
+        cout<<"Enter the right child of "<<front->data<<endl;
+        int rightChilddata;
+        cin>>rightChilddata;
+        if(rightChilddata != -1)
+        {
+            BinaryTreeNode* rightchild = new BinaryTreeNode( rightChilddata );
+            front -> right = rightchild;
+            q.push(rightchild);
+        }
+
+    }
+    return root;
+
+}
+
+int main()
+{
+   BinaryTreeNode* root = takeInputLevelWise();
+   printLevelwise(root);
+   
+   return 0;
+}
