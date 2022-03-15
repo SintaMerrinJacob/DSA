@@ -1,0 +1,39 @@
+void getMin( BinaryTreeNode<int> *root , int &minval)
+{
+    if(root == NULL)
+        return;
+    
+    if(root -> data < minval )
+        minval = root -> data;
+    
+    getMin(root -> left , minval);
+    getMin(root -> right , minval);
+    
+}
+
+void getMax( BinaryTreeNode<int> *root , int &maxval)
+{
+    if(root == NULL)
+        return;
+    
+    if(root -> data > maxval )
+        maxval = root -> data;
+    
+    getMax(root -> left , maxval);
+    getMax(root -> right , maxval);
+    
+}
+
+
+pair<int, int> getMinAndMax(BinaryTreeNode<int> *root) 
+{
+	pair<int,int>p;
+    int maxval = root->data;
+    int minval = root -> data;
+    getMin(root , minval);
+    p.first    =  minval;
+    getMax(root , maxval);
+     p.second = maxval;
+    
+    return p;
+}
