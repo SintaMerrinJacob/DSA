@@ -1,0 +1,61 @@
+#include<queue>
+#include<stack>
+void zigZagOrder(BinaryTreeNode<int> *root) 
+{
+   int order = 1;
+   
+    // if order = 1 , left to right
+  //  if order = -1 , right to left
+    queue< BinaryTreeNode<int> *>q;
+    q.push(root);
+    stack< BinaryTreeNode<int> *>s;
+    while( !q.empty() )
+    {
+        int nodecount = q.size();
+        while(nodecount > 0)
+        {
+            BinaryTreeNode<int> *front = q.front();
+            q.pop();
+            //cout<<front -> data<<" ";
+            if(order == 1)
+            {
+                  cout<<front -> data<<" ";
+                if( front -> left != NULL)
+                {
+                      q.push( front -> left);
+                      s.push( front -> left);
+                }
+             if( front -> right != NULL)
+                 {
+                       q.push( front -> right);
+                       s.push( front -> right);
+                 }
+         }
+            
+            else
+            {
+                  if( front -> left != NULL)
+                {
+                      q.push( front -> left);
+                 }
+                     
+               if( front -> right != NULL)
+                 {
+                       q.push( front -> right);
+                 }
+                
+         }
+            
+            nodecount --;
+            
+            
+        }
+        cout<<endl;
+        order = order*-1;
+        while( !s.empty())
+            {
+                cout<<s.top() -> data<<" ";
+                s.pop();
+            }
+    }
+}
