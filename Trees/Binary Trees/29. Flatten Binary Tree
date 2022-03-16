@@ -1,0 +1,28 @@
+void flatten(TreeNode* root) 
+    {
+        if(root == NULL)
+            return;
+        
+        flatten(root -> left);
+        flatten(root -> right);
+        
+        if( root -> left != NULL && root -> right != NULL)
+        {
+            TreeNode* temp = root -> right;
+            root -> right = root -> left;
+            TreeNode* curr = root -> left;
+            while( curr ->right != NULL)
+            {
+                curr = curr -> right;
+            }
+            curr -> right = temp;
+            
+        }
+        
+        if( root -> left != NULL)
+        {
+            root -> right = root -> left;
+            root -> left = NULL;
+        }
+        
+    }
