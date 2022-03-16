@@ -1,0 +1,84 @@
+#include<queue>
+vector<Node<int>*> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
+{
+    vector<Node<int>*> LLhead;
+    
+    //////////////////case 1: Tree is Empty//////////////////////
+    if(root == NULL)
+    {
+        LLhead.push_back(NULL);
+        return LLhead;
+    }
+    
+    ////////////////////case2 : Only root is present////////////////////
+    if( root -> left == NULL && root -> right == NULL)
+    {
+        Node<int>*head = new Node<int>(root -> data);
+        LLhead.push_back(head);
+        return LLhead;
+    }
+    
+    //////////////////case 3: all other cases ///////////////////////////
+    queue< BinaryTreeNode<int> * > q;
+    q.push(root);
+    Node<int>*head = new Node<int>(q.front() -> data);
+    LLhead.push_back(head);
+    head = NULL;
+    
+    while( !q.empty() )
+    {
+        int nodecount = q.size();
+        Node<int>* curr;
+        
+        while( nodecount > 0)
+        {
+             BinaryTreeNode<int> * front = q.front();
+             q.pop();
+             if(front -> left != NULL)
+             {
+                 q.push(front -> left);
+                 Node<int>* newnode = new Node<int>(front -> left -> data);
+                 if(head == NULL)
+                 {
+                      head = newnode;
+                      curr = head;
+                      LLhead.push_back(head);
+                 }
+                
+                 else
+                 {
+                 curr -> next = newnode;
+                 curr = newnode;
+                 }
+                
+             }
+                 
+            if(front -> right != NULL)
+            {
+                q.push(front -> right);
+                Node<int>* newnode = new Node<int>(front -> right -> data);
+                if(head == NULL)
+                {
+                     head = newnode;
+                     LLhead.push_back(head);
+                     curr = head;
+                }
+                else
+                {
+                     curr -> next = newnode;
+                 curr = newnode;
+                }
+                 
+            }
+                 
+            
+             nodecount--;
+            
+            
+        }
+        curr -> next = NULL;
+        head = NULL;
+        
+    }
+    return LLhead;
+}
