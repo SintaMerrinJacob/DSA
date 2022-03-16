@@ -1,61 +1,80 @@
-#include<queue>
-#include<stack>
-void zigZagOrder(BinaryTreeNode<int> *root) 
-{
-   int order = 1;
-   
-    // if order = 1 , left to right
-  //  if order = -1 , right to left
-    queue< BinaryTreeNode<int> *>q;
-    q.push(root);
-    stack< BinaryTreeNode<int> *>s;
-    while( !q.empty() )
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) 
     {
-        int nodecount = q.size();
-        while(nodecount > 0)
+        
+            
+        vector<int>output;
+        vector< vector<int> > ans;
+        
+        if(root == NULL)
+            return ans;
+        
+        if( root->left == NULL && root -> right == NULL)
         {
-            BinaryTreeNode<int> *front = q.front();
-            q.pop();
-            //cout<<front -> data<<" ";
-            if(order == 1)
-            {
-                  cout<<front -> data<<" ";
-                if( front -> left != NULL)
+            output.push_back(root -> val);
+            ans.push_back(output);
+            return ans;
+        }
+        
+        queue<TreeNode*>q;
+        stack<TreeNode*>s;
+        
+        q.push(root);
+        
+        int order = 1;
+        
+        while( !q.empty() )
+        {
+             int nodecount = q.size();
+             while( nodecount > 0)
+             {
+                 TreeNode *front = q.front();
+                 q.pop();
+                 if(order == 1)
                 {
+                  output.push_back(front -> val);
+                  if( front -> left != NULL)
+                   {
                       q.push( front -> left);
                       s.push( front -> left);
-                }
-             if( front -> right != NULL)
-                 {
+                   }
+                 if( front -> right != NULL)
+                   {
                        q.push( front -> right);
                        s.push( front -> right);
-                 }
-         }
+                   }
+                }
             
-            else
-            {
+               else
+              {
                   if( front -> left != NULL)
-                {
-                      q.push( front -> left);
-                 }
-                     
-               if( front -> right != NULL)
-                 {
-                       q.push( front -> right);
-                 }
-                
-         }
+                     q.push( front -> left);
+                  if( front -> right != NULL)
+                     q.push( front -> right);
+              }
+                 
+                 nodecount --;
+             }
+            if( !output.empty())
+            {
+                ans.push_back(output);
+                output.clear();
+            }
             
-            nodecount --;
-            
+             order = order*-1;
+             while( !s.empty())
+               {
+                output.push_back(s.top() -> val);
+                s.pop();
+               }
+             if( !output.empty())
+            {
+                ans.push_back(output);
+                output.clear();
+            }
             
         }
-        cout<<endl;
-        order = order*-1;
-        while( !s.empty())
-            {
-                cout<<s.top() -> data<<" ";
-                s.pop();
-            }
+        
+        
+        return ans;
     }
-}
+};
