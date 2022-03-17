@@ -1,1 +1,55 @@
+class Pair
+{
+    public:
+      Node<int>* head;
+      Node<int>* tail;
+};
 
+Pair solve(BinaryTreeNode<int>* root)
+{
+    Pair ans;
+    if(root == NULL)
+     {
+        ans.head = NULL;
+        ans.tail = NULL;
+        return ans;
+     }
+    
+    Node<int>* rootnode = new Node<int>(root -> data);
+    
+    Pair leftans = solve(root -> left);
+    Pair rightans = solve( root -> right);
+    
+    if( leftans.head == NULL && rightans.head == NULL)
+    {
+        ans.head = ans.tail = rootnode;
+    }
+    else if ( leftans.head == NULL && rightans.head != NULL)
+    {
+        ans.head = rootnode;
+        rootnode -> next = rightans.head;
+        ans.tail = rightans.tail;
+    }
+    else if( leftans.head != NULL && rightans.head == NULL)
+    {
+        ans.head = leftans.head;
+        leftans.tail -> next = rootnode;
+        ans.tail = rootnode;
+     }
+    else
+    {
+        ans.head = leftans.head;
+        leftans.tail -> next = rootnode;
+        rootnode -> next = rightans.head;
+        ans.tail = rightans.tail;
+    }
+    
+    return ans;
+    
+    
+}
+Node<int>* constructLinkedList(BinaryTreeNode<int>* root) 
+{
+    Pair LL = solve(root);
+    return LL.head;
+}
