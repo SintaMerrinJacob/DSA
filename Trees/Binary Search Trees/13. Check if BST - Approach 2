@@ -1,0 +1,37 @@
+class BST
+{
+    public:
+     int minimum;
+     int maximum;
+     bool isBST;
+};
+
+BST solve( BinaryTreeNode<int> *root )
+{
+    if( root == NULL)
+    {
+        BST obj;
+        obj.minimum = INT_MAX;
+        obj.maximum = INT_MIN;
+        obj.isBST = true;
+        return obj;
+    }
+    
+    BST leftpart = solve( root -> left);
+    BST rightpart = solve(root -> right);
+    
+    BST obj;
+    obj.minimum = min( root -> data , min(leftpart.minimum , rightpart.minimum));
+    obj.maximum= max( root -> data , max(leftpart.maximum , rightpart.maximum)); 
+    obj.isBST = (root -> data > leftpart.maximum) && ( root -> data <= rightpart.minimum) && (leftpart.isBST) && (rightpart.isBST);
+    return obj;
+}
+bool isBST(BinaryTreeNode<int> *root) 
+{
+    
+    BST obj = solve(root);
+    if(obj.isBST)
+        return true;
+    else
+        return false;
+} 
