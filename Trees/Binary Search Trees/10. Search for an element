@@ -1,0 +1,25 @@
+
+void solve(BinaryTreeNode<int> *root , int k , bool &ans)
+{
+    if(root == NULL)
+       return ;
+    
+    if( root -> data == k)
+    {
+        ans = true;
+        return;
+    }
+    
+    if( k < root -> data)
+        solve( root -> left , k , ans);
+    else if( k > root -> data )
+        solve( root -> right , k , ans);
+    
+    
+}
+bool searchInBST(BinaryTreeNode<int> *root , int k)
+{
+    bool ans = false;
+	solve(root ,k,ans);
+    
+}
