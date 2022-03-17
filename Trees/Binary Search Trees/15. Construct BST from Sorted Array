@@ -1,0 +1,20 @@
+BinaryTreeNode<int>* solve(int *input , int start , int end)
+{
+    if(start > end)
+        return NULL;
+    
+    int mid = start + (end - start)/2;
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(input[mid]);
+    
+    root -> left = solve(  input , start , mid -1 );
+    root -> right = solve(input , mid + 1 , end);
+    
+    return root;
+}
+
+BinaryTreeNode<int>* constructTree(int *input, int n)
+{
+	int start = 0;
+    int end = n-1;
+    return solve(input, start , end);
+}
