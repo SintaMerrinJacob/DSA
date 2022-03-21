@@ -1,0 +1,23 @@
+Given a binary search tree, you have to replace each node's data with the sum of all nodes which are greater or equal than it. 
+You need to include the current node's data also.
+
+
+void solve( BinaryTreeNode<int> *root ,  int& sum)
+{
+    if( root == NULL )
+        return;
+    
+    solve(root -> right , sum );
+   
+    sum = sum + root -> data;
+    root -> data = sum;
+    
+     solve(root -> left , sum );
+    
+    
+}
+void replaceWithLargerNodesSum(BinaryTreeNode<int> *root) 
+{
+    int sum = 0;
+    solve( root , sum);
+}
