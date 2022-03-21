@@ -1,0 +1,18 @@
+Create & Insert Duplicate Node
+For a given a Binary Tree of type integer, duplicate every node of the tree and attach it to the left of itself.
+The root will remain the same. So you just need to insert nodes in the given Binary Tree.
+
+
+void insertDuplicateNode(BinaryTreeNode<int> *root) 
+{
+    if( root == NULL )
+        return;
+    
+     insertDuplicateNode( root -> left);
+    insertDuplicateNode( root -> right);
+    
+    BinaryTreeNode<int> * newnode = new BinaryTreeNode<int> ( root -> data );
+    BinaryTreeNode<int> *temp = root -> left;
+    root -> left = newnode;
+    newnode -> left = temp;
+}
