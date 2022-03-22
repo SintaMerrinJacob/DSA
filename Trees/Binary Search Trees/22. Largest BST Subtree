@@ -1,0 +1,40 @@
+class BST
+{
+    public:
+     int minimum;
+     int maximum;
+     bool isBST;
+     int height;
+};
+BST  largestBSTSubtreeUtil( BinaryTreeNode<int> *root )
+{
+    if( root == NULL )
+    {
+        BST obj;
+          obj.minimum = INT_MAX;
+          obj.maximum = INT_MIN;
+          obj.isBST = true;
+          obj.height = 0;
+        return obj;
+    }
+    
+    BST leftans   =  largestBSTSubtreeUtil (root -> left);
+    BST rightans =  largestBSTSubtreeUtil (root -> right);
+    
+    BST obj;
+    
+       obj.minimum = min (root -> data , min(leftans.minimum , rightans.minimum) );
+       obj.maximum = max (root -> data , max(leftans.maximum , rightans.maximum) );
+       obj.isBST = (root -> data > leftans.maximum ) && ( root -> data < rightans.minimum ) && (leftans.isBST) && (rightans.isBST);
+       if(  obj.isBST )
+           obj.height = 1 + max( leftans.height , rightans.height );
+      else
+          obj.height =  max( leftans.height , rightans.height );
+    
+    return obj;
+}
+int largestBSTSubtree(BinaryTreeNode<int> *root) 
+{
+    BST obj = largestBSTSubtreeUtil(root) ;
+    return obj.height;
+}
