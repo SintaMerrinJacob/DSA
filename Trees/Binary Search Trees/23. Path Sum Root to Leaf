@@ -1,0 +1,29 @@
+For a given Binary Tree of type integer and a number K, print out all root-to-leaf paths where the sum of all the node data along the path is equal to K.
+
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k , vector<int>v )
+{
+    if( root == NULL )
+        return;
+    
+    v.push_back(root -> data);
+    k = k - root -> data;
+    
+    if( root -> left == NULL && root -> right == NULL )
+    {
+        if( k == 0 )
+        {
+            for( int i : v)
+                cout<<i<<" ";
+            cout<<endl;
+        }
+        v.pop_back();
+        return;
+    }
+    rootToLeafPathsSumToK(root -> left , k , v);
+    rootToLeafPathsSumToK(root -> right , k , v);
+}
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k) {
+    vector<int>v;
+    rootToLeafPathsSumToK(root , k , v);
+    return;
+}
