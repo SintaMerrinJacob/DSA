@@ -1,1 +1,65 @@
-
+void swap(int &a, int &b)
+{
+    int temp = a;
+    a=b;
+    b=temp;
+}
+void heapSort(int arr[], int n) 
+{
+     // decreasing order so use min heap 
+    
+    // Stage 1 : Insert elements into heap 
+    
+    int i = 1;
+    while( i < n)
+    {
+        int childIndex = i;
+        while( childIndex > 0)
+        {
+            int parentIndex =  (childIndex - 1)/2;
+            
+            if( arr[childIndex] < arr[parentIndex] )
+                 swap( arr[childIndex] , arr[parentIndex]);
+           else
+                break;
+            
+            childIndex = parentIndex;
+        }
+        i++;
+    }
+    
+    
+    // Stage 2 : Remove elements from heap 
+    
+     
+    int j = n;
+    
+    while( j>1 )
+    {
+        swap( arr[0] , arr[j-1] );
+        j--;
+        
+        int pi = 0 ; // parentIndex
+        int lci = 2*pi + 1 ; // leftchildIndex
+        int rci = 2*pi + 2; //rightchildIndex
+       
+        
+        while( lci < j)
+        {
+             int minIndex = pi;
+            if( arr[minIndex] >arr[lci] )
+                minIndex = lci;
+            if( rci <j && arr[minIndex] > arr[rci])
+                minIndex = rci;
+            if(minIndex == pi)
+                    break;
+            swap(arr[minIndex] , arr[pi]);
+            
+            pi = minIndex;
+            lci = 2*pi + 1 ;
+            rci = 2*pi + 2;
+            
+        }
+        
+    }
+}
