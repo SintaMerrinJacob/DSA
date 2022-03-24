@@ -1,0 +1,20 @@
+bool isMaxHeap(int arr[], int n) 
+{
+    int pi = 0;
+    int lci = 2*pi + 1;
+    int rci = 2*pi + 2;
+    int i = 0;
+    while(  lci<n)
+    {
+        if ( (lci <n && arr[pi] < arr[lci] ) || (arr[pi] < arr[rci]  && rci < n ) )
+            return false;
+        
+        else
+        {
+            pi = i++;
+            lci = 2*pi + 1;
+            rci = 2*pi + 2;
+        }
+    }
+    return true;
+}
