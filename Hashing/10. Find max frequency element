@@ -1,0 +1,23 @@
+#include<unordered_map>
+#include<limits.h>
+int highestFrequency(int arr[], int n) 
+{
+    unordered_map<int,int>mp;
+    
+    for(int i = 0 ; i<n ; i++)
+        mp[arr[i]]++;
+    
+    int maxval = 0;
+    int maxfreq = 0;
+    
+    for(int i = 0 ; i<n ; i++)
+    {
+        if(mp[arr[i]] > maxfreq)
+        {
+            maxval = arr[i];
+            maxfreq = mp[arr[i]];
+        }
+    }
+    
+    return maxval;
+}
