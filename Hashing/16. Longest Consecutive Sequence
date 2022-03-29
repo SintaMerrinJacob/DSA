@@ -1,0 +1,85 @@
+You are given an array of unique integers that contain numbers in random order. 
+You have to find the longest possible sequence of consecutive numbers using the numbers from given array.
+You need to return the output array which contains starting and ending element. 
+If the length of the longest possible sequence is one, then the output array must contain only single element.
+
+NOTE
+1. Best solution takes O(n) time.
+2. If two sequences are of equal length, then return the sequence starting with the number whose occurrence is earlier in the array.
+
+INPUT FORMAT
+The first line of input contains an integer, that denotes the value of the size of the array. Let us denote it with the symbol n.
+The following line contains n space separated integers, that denote the value of the elements of the array.
+
+OUTPUT FORMAT
+The first and only line of output contains starting and ending element of the longest consecutive sequence. 
+If the length of longest consecutive sequence, then just print the starting element.
+
+7
+3 7 2 1 9 8 41
+
+7 9
+Explanation: Sequence should be of consecutive numbers. 
+Here we have 2 sequences with same length i.e. [1, 2, 3] and [7, 8, 9], but we should select [7, 8, 9] 
+because the starting point of [7, 8, 9] comes first in input array and therefore, 
+the output will be 7 9, as we have to print starting and ending element of the longest consecutive sequence.
+
+
+
+
+vector<int> longestConsecutiveIncreasingSequence(int *arr, int n)
+{
+    vector<int>ans;
+    unordered_set<int>s;
+    
+    for(int i = 0 ; i<n ; i++)
+        s.insert(arr[i]);
+    
+     int start = -1;
+     int end = -1;
+     int length = -1;
+    
+    for(int i = 0 ; i<n ; i++)
+    {
+           if( s.find(arr[i] - 1) == s.end() )
+              {
+                   start = arr[i];
+                   end = arr[i];
+                   length = 1;
+                   while( s.find(end+1) != s.end() )
+                    {
+                          end++; length++;
+                    }
+                
+                  // initially when vector is empty
+                  if(ans.empty () == true)
+                    {
+                      if(length > 1)
+                         {
+                             ans.push_back(start);
+                             ans.push_back(end);
+                         }
+                     else
+                            ans.push_back(start);
+                    }
+                 else
+                 {
+                     if(ans.size() == 1 && length > 1)
+                     {       ans.pop_back();
+                             ans.push_back(start);
+                             ans.push_back(end);
+                     }
+                     else if( end - start +1 > (ans[1] - ans[0] +1)  )
+                         {
+                             while( !ans.empty())
+                                 ans.pop_back();
+                                
+                                ans.push_back(start);
+                                ans.push_back(end);
+                          }
+                 }
+             }     
+    }       
+    return ans;
+    
+}
