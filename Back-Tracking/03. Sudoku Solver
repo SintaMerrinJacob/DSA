@@ -73,3 +73,101 @@ public:
     
     
 };
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+#include<bits/stdc++.h>
+using namespace std;
+# define n 9
+
+
+bool isSafe(int grid[n][n] , int row , int col , int num)
+{
+    //row check
+    for(int i = 0 ; i<n ; i++)
+    {
+        if(grid[row][i] == num)
+            return false;
+    }
+    
+    
+    //col check
+    for(int i = 0 ; i<n ; i++)
+    {
+        if(grid[i][col] == num)
+            return false;
+    }
+    
+    
+    //box check
+    int rowFactor = row - (row%3);
+    int colFactor  = col - (col%3);
+    
+    for(int i = 0 ; i<3 ; i++)
+    {
+        for(int j = 0 ; j<3 ; j++)
+        {
+            if(grid[i+rowFactor][j+colFactor] == num)
+                return false;
+        }
+    }
+    
+    
+    return true;
+}
+
+bool sudokuSolver(int grid[n][n] , int row , int col)
+{
+    if(row == n-1 && col == n)
+        return true;
+    
+    if(col == n)
+    {
+        row++;
+        col = 0;
+    }
+    
+    if(grid[row][col] != 0)
+        return sudokuSolver(grid , row , col+1);
+    
+    for(int i = 1; i<=n ; i++)
+    {
+        if(isSafe(grid,row,col,i) )
+        {
+            grid[row][col] = i;
+            if( sudokuSolver(grid , row , col+1) ) 
+               return true;
+            
+        }
+        grid[row][col] = 0;
+    }
+    
+    return false;
+}
+int main()
+{
+    int grid[9][9];
+    for(int i = 0 ; i<9 ; i++)
+    {
+        for(int j = 0 ; j<9 ; j++)
+        {
+            cin>>grid[i][j];
+        }
+    }
+    
+    
+    if(sudokuSolver(grid , 0 , 0))
+        cout<<"true";
+    else
+        cout<<"false";
+    
+    return 0;
+}
