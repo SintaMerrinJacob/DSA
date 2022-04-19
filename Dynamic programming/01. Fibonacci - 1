@@ -1,1 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
 
+int fib(int n , int* &ans)
+{
+    if( ans[n] != -1)
+     return ans[n];
+    
+    ans[n] = fib(n-1,ans) + fib(n-2,ans);
+     
+    return ans[n];
+    
+}
+
+int main()
+{
+  int n;
+  cout<<"Enter value of n"<<endl;
+  cin>>n;
+  int *ans = new int[n+1];
+  memset(ans,-1, (n+1)*sizeof(int) );
+  ans[0] = 0;
+  ans[1] = 1;
+  cout<<n<<"th fibonacci number is " << fib(n,ans)<<endl;
+  return 0;
+}
