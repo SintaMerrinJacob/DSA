@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+
+int findSubsetSum(ll arr[],ll n, ll k, ll index,ll count)
+{
+    if( index == n )
+    {
+        if( k == 0)
+             count++;
+        
+        return count;
+    }
+    
+    count =  findSubsetSum(arr,n,k-arr[index],index+1,count);
+    count = findSubsetSum(arr,n,k,index+1,count);
+    
+    return count;
+    
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,k;
+        cin>>n>>k;
+        ll arr[n];
+        for(ll i = 0 ; i<n ; i++)
+           cin >> arr[i];
+        ll index = 0;
+        ll count = 0;
+        if (n == 0)
+            cout << ""<< "\n";
+        else
+           cout<<findSubsetSum(arr,n,k,index,count)<<endl;
+        
+    }
+}
