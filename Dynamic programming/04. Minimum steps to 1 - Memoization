@@ -1,0 +1,30 @@
+int helper(vector<int>minCount , int n )
+{
+    if( n == 1)
+        return 0;
+    
+    if(minCount[n] != -1)
+        return minCount[n];
+    
+    int x = helper(minCount,n-1);
+    int y = INT_MAX , z = INT_MAX;
+    
+    if(n%2 == 0)
+        y = helper(minCount , n/2);
+    
+    if(n%3 == 0)
+        z = helper(minCount , n/3);
+    
+    minCount[n] = min(x , min(y,z)) + 1;
+    
+    return minCount[n];
+}
+
+int countMinStepsToOne(int n)
+{
+	vector<int>minCount(n+1);
+    for(int i = 0 ; i<=n ; i++)
+        minCount[i] = -1;
+    return helper(minCount , n);
+    
+}
