@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+long possibleways(int n )
+{
+    vector<long>steps(n+1);
+  
+    if( n == 1)
+        return 1;
+    else if( n ==2 )
+        return 2;
+    else if( n==3)
+        return 4;
+    else
+    {
+          steps[0] = 1;
+          steps[1] = 1;
+          steps[2] = 2;
+          steps[3] = 4;
+        
+         for(int i = 4 ; i<= n ; i++)
+           steps[i] = (steps[i-1] % 1000000007 + steps[i-2] % 1000000007 + steps[i-3] % 1000000007) % 1000000007;
+         return steps[n] ;
+   }
+    
+   }
+int main()
+{
+  int t;
+  cin >> t;
+ while( t--)
+ {
+     int n;
+     cin >> n;
+     cout<<possibleways(n)<<endl;
+ }
+
+    return 0;
+}
