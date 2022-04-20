@@ -1,0 +1,23 @@
+
+int countStepsToOne(int n)
+{
+	vector<int>minCount(n+1);
+    minCount[0] = 0;
+    minCount[1] = 0;
+    
+    for(int i = 2 ; i<=n ; i++)
+    {
+        if(i%2 == 0 && i%3 == 0)
+            minCount[i] =  min ( minCount[i-1] ,  min(minCount[i/2] ,  minCount[i/3]) ) + 1;
+        else if(i%2 != 0 && i%3 == 0)
+            minCount[i] =  min ( minCount[i-1] ,  minCount[i/3] )  + 1;
+        else if(i%2 == 0 && i%3 != 0)
+             minCount[i] =  min ( minCount[i-1] ,  minCount[i/2] )  + 1;
+        else
+            minCount[i] = minCount[i-1] + 1;
+            
+    }
+    
+    return minCount[n];
+    
+}
