@@ -1,1 +1,18 @@
-
+#include<vector>
+#define mod 1000000007
+int balancedBTs(int n) 
+{
+    vector<long>dp(n+1);
+    dp[0] = 1;
+    dp[1] = 1;
+    
+    for(int i = 2 ; i<=n ; i++)
+    {
+       long long int smalloutput1 = ((long long)dp[i-1]*dp[i-1])%mod;
+       long long int smalloutput2 = (2*(long long)dp[i-1]*dp[i-2])%mod;
+       dp[i] =(smalloutput1+  smalloutput2) % mod;
+    }
+        
+    
+    return dp[n];
+}
