@@ -1,0 +1,24 @@
+int minCount(int n)
+{
+    //base case
+    
+    if(sqrt(n) - floor( sqrt(n)) == 0)
+        return 1;
+	
+    if(n == 0 || n==1 || n==2 || n==3)
+        return n;
+    
+    int shortans = n;
+    
+    for(int i = 1; i<=sqrt(n) ; i++ )
+    {
+        int temp = i*i;
+        if(temp>n)
+            break;
+        
+        shortans = min(shortans , 1+minCount(n-temp));
+    }
+    
+    return shortans;
+    
+}
