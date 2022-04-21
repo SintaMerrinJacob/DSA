@@ -1,1 +1,49 @@
+int helper(int **input, int **minCostij , int i, int j, int m , int n)
+{
+    //base case
+    
+    if(i == m-1 && j == n-1)
+        return input[i][j];
+    
+    if(minCostij[i][j] != -1)
+        return minCostij[i][j];
+    
+    int x = INT_MAX , y = INT_MAX , z = INT_MAX;
+   
+   
+    //move right
+    if(j < n-1)
+    x = helper(input , minCostij , i , j+1 , m , n);
+    //move down
+    if(i<m-1)
+     y = helper(input , minCostij , i+1, j , m , n );
+    //move diagonal
+    if(i<m-1 && j<n-1)
+     z = helper(input,minCostij , i+1,j+1,m,n);
+    
+    minCostij[i][j] =  input[i][j] + min(x , (min(y,z)));
+    
+    return minCostij[i][j];
+    
+}
 
+int minCostPath(int **input, int m, int n)
+{
+    int **minCostij = new int*[m+1];
+    for(int i = 0 ; i<m ; i++)
+    {
+        minCostij[i] = new int [n+1];
+    }
+    
+    
+    for(int i = 0 ; i<m ; i++)
+    {
+        for(int j = 0 ; j<n ; j++)
+        {
+            minCostij[i][j] = -1;
+        }
+    }
+	return helper(input , minCostij , 0 , 0 , m , n);
+    
+    
+}
