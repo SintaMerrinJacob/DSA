@@ -1,1 +1,32 @@
-
+int minCostPath(int **input, int m, int n)
+{
+    int **minCostij = new int*[m];
+    for(int i = 0 ; i<m ; i++)
+    {
+        minCostij[i] = new int [n];
+    }
+    
+     minCostij[m-1][n-1] = input[m-1][n-1];
+    
+    //moving left (opp of right)
+    for(int i = n-2 ; i>=0 ; i--)
+         minCostij[m-1][i] =  minCostij[m-1][i+1] + input[m-1][i];
+    
+    //moving up(opp of down)
+    for(int i = m-2 ; i>=0 ; i--)
+        minCostij[i][n-1] = minCostij[i+1][n-1] + input[i][n-1] ;
+    
+    //moving diagonal up
+    for(int i = m-2 ; i>=0  ; i--  )
+    {
+        for(int  j = n-2 ;  j>=0 ; j-- )
+        {
+              minCostij[i][j] = min( minCostij[i+1][j], min (  minCostij[i][j+1] , minCostij[i+1][j+1]    )  )+ input[i][j];
+        }
+    }
+       
+    
+    return minCostij[0][0];
+   
+    
+}
