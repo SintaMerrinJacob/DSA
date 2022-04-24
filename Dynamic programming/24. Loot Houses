@@ -1,0 +1,109 @@
+A thief wants to loot houses. He knows the amount of money in each house. He cannot loot two consecutive houses. Find the maximum amount of money he can loot.
+The first line of input contains an integer value of 'n'. It is the total number of houses.
+
+The second line of input contains 'n' integer values separated by a single space denoting the amount of money each house has.
+
+/////////////Solution 1 - Recursion(Brute Force)//////////////////
+
+int maxMoneyLooted(int *arr, int n)
+{
+	private:
+    int rob(vector<int>& nums , int i , int size)
+    {
+        if(i>=size)
+            return 0;
+        int x = rob(nums,i+1,size);
+        int y = rob(nums,i+2,size)+nums[i];
+        
+        return max(x,y);
+    }
+public:
+    int rob(vector<int>& nums) 
+    {
+        int n = nums.size();
+        return rob(nums,0,n);
+    }
+}
+
+
+//////////////Solution 2 - DP Memoization////////////////
+
+int maxMoneyLooted(int *arr, int n ,  int*output , int i )
+{
+	if(i>=n)
+        return 0;
+    
+    if(output[i] != -1)
+        return output[i];
+    // Loot current house
+    int x = maxMoneyLooted(arr,n , output,i+2) + arr[i];
+    //Skip current house
+    int y =  maxMoneyLooted(arr,n,output,i+1);
+    
+    output[i] =  max(x,y);
+    
+    return   output[i];
+}
+
+int maxMoneyLooted(int *arr, int n)
+{
+    int*dp = new int[n];
+    for(int i =0 ; i<n ; i++)
+        output[i] = -1;
+    
+    return  maxMoneyLooted(arr, n ,  output, 0 );
+
+    
+}
+
+//////////////Solution 3 - DP Tabulation/////////////////
+
+int maxMoneyLooted(int *arr, int n)
+{
+    int*dp = new int[n];
+    if(n==0)
+        return 0;
+   dp[0] = arr[0];
+   dp[1] = max(arr[0] , arr[1]);
+
+    for(int i = 1 ; i<n ; i++)
+    {
+        int x = dp[i-2]+arr[i];
+        int y = dp[i-1];
+        dp[i] = max(x,y);
+    }
+    
+   return dp[n-1];
+
+    
+}
+
+
+
+///////////////Solution 4 - Space Optimized////////////////
+
+We can observe that the above dp solution relied only on the previous two indices in dp to compute the value of current dp[i]. 
+So, we dont really need to maintain the whole dp array and can instead just maintain the values of previous index (denoted as prev below) 
+and previous-to-previous index (denoted as prev2) and 
+we can calculate the value for current index (cur) using just these two variables and roll-forward each time.
+
+int maxMoneyLooted(int *arr, int n)
+{
+    int cur = 0;
+    int prev2 = 0;
+    int prev1 = 0;
+    for(int i = 0 ; i<n ; i++)
+    {
+        cur = max(prev2 + arr[i] , prev1);
+        prev2 = prev1;
+        prev1 = cur;
+    }
+    
+    return cur;
+}
+    
+    
+    
+    
+   
+
