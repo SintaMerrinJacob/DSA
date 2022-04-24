@@ -1,1 +1,31 @@
-
+int knapsack(int* weight, int* value, int n, int maxWeight) 
+{
+	int** output = new int* [n+1];
+    for(int i = 0 ; i<=n ; i++)
+    {
+        output[i] = new int[maxWeight+1];
+    }
+    
+    for(int i = 0 ; i<=n ; i++)
+        output[i][0] = 0;
+    
+    for(int j = 0 ; j<=maxWeight ; j++)
+         output[0][j] = 0;
+    
+    for(int i = 1 ; i<=n ; i++)
+    {
+        for(int j = 1 ; j<=maxWeight ; j++)
+        {
+            if( j < weight[n-i] )
+                 output[i][j] = output[i - 1][j];
+            else
+            {
+                int x = output[i - 1][j]; // exclude current element
+                int y = output[i - 1][j - weight[n - i]] + value[n - i];
+               output[i ][j] = max(x,y);
+            }
+        }
+    }
+    
+    return  output[n][maxWeight];
+}
