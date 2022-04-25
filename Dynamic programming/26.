@@ -1,0 +1,55 @@
+Given two integers a and b. You need to find and return the count of possible ways in which we can represent the number a as the sum of unique integers raise to the power b.
+For example: if a = 10 and b = 2, only way to represent 10 as sum of unique integers raised to power 2 is- 10 = 1^2 + 3^2 
+
+//////////// Recursion////////////////
+#include<cmath>
+int getAllWays(int sum , int power , int base)
+{
+    int result = pow(base , power);
+    if(result == sum)
+        return 1;
+    if(result > sum)
+        return 0;
+    
+    //include current base
+    int x = getAllWays(sum - result , power , base+1);
+    int y = getAllWays(sum,power,base+1);
+    
+    return x+y;
+}
+
+int getAllWays(int a, int b) 
+{
+	return getAllWays(a,b,1);
+}
+
+
+
+/////////////////Memoization///////////////
+#include<cmath>
+int getAllWays(int sum , int power , int base , int* dp)
+{
+    int result = pow(base , power);
+    if(result == sum)
+        return 1;
+    if(result > sum)
+        return 0;
+    
+    //if(dp[sum] != -1)
+        //return dp[sum];
+    //include current base
+    int x = getAllWays(sum - result , power , base+1,dp);
+    int y = getAllWays(sum,power,base+1,dp);
+    
+    dp[sum] =  x+y;
+    
+    return dp[sum];
+}
+
+int getAllWays(int a, int b) 
+{
+    int* dp = new int [10000];
+    for(int i = 0 ; i<10000 ; i++)
+        dp[i] = -1;
+	return getAllWays(a,b,1,dp);
+}
