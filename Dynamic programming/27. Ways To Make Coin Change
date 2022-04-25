@@ -1,0 +1,62 @@
+For the given infinite supply of coins of each of denominations, D = {D0, D1, D2, D3, ...... Dn-1}. You need to figure out the total number of ways W, 
+in which you can make the change for Value V using coins of denominations D.
+Return 0 if the change isn't possible.
+
+
+
+//////////////////////////////////////RECURSION/////////////////////////////////////////
+int countWaysToMakeChange(int denominations[], int n, int value )
+{
+    if(value == 0)
+        return 1;
+    
+    if(value <0)
+        return 0;
+    
+    if(n<=0 && value>=1)
+        return 0;
+    
+    int x =  countWaysToMakeChange(denominations, n , value-denominations[n-1]);
+    int y = countWaysToMakeChange(denominations, n-1 , value);
+    
+    return x+y;
+    
+}
+
+
+
+//////////////////////////////MEMOIZATION/////////////////////////////////////
+#include<vector>
+int helper(int s[] , int n , int v ,  vector< vector<int> > &output)
+{
+    if(v == 0 )
+        return  1;
+    if(n==0 )
+        return 0;
+    if(v<0)
+        return 0;
+    
+    if(output[n][v] != -1)
+        return  output[n][v];
+    
+   
+        //include curr denomination
+    int x = helper(s,n, v-s[0] , output);
+        //exclude curr denomination
+    int y = helper(s+1,n-1,v,output);
+     
+    output[n][v] = x+y;
+    
+    
+    
+    return  output[n][v];
+}
+
+int countWaysToMakeChange(int denominations[], int den_size, int value )
+{
+    vector< vector<int> > output (den_size + 1 , vector<int>(value+1 , -1));
+    
+    return helper(denominations , den_size , value , output);
+}
+
+//////////////////////////////DP//////////////////////////////////////
