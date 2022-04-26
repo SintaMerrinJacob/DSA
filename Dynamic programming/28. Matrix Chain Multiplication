@@ -1,0 +1,33 @@
+#include<climits>
+int mcmhelper(int* arr , int** dp, int s , int e)
+{
+    if(  e-s==1)
+        return 0;
+    
+    if(dp[s][e] != -1)
+        return dp[s][e];
+    
+    int ans = INT_MAX;
+    for(int k = s+1 ; k<e ; k++)
+    {
+        int temp = mcmhelper(arr,dp,s,k) +mcmhelper(arr,dp,k,e) + arr[s]*arr[k]*arr[e];
+        ans = min(ans , temp);
+    }
+    
+    dp[s][e] = ans;
+    return ans;
+}
+
+int matrixChainMultiplication(int* arr, int n) 
+{
+    int** dp = new int* [n+1];
+    for(int i = 0 ; i<=n ; i++)
+    {
+        dp[i] = new int[n+1];
+        for(int j = 0 ; j<=n ;j++)
+              dp[i][j] = -1;
+    }
+
+     
+      return mcmhelper(arr,dp,0,n);
+}
