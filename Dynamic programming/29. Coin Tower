@@ -1,0 +1,26 @@
+string findWinner(int n, int x, int y)
+{
+	string a = "Beerus";
+    string b = "Whis";
+    
+    int dp[n+1];
+    dp[0] = false;
+    dp[1] = true;
+    
+    for(int i = 2 ;i<=n ;i++)
+    {
+       if( i-1 >=0 && dp[i-1] == false)
+           dp[i] = true;
+        else if( i-x >=0 && dp[i-x] == false)
+           dp[i] = true;
+        else if ( i-y >=0 && dp[i-y] == false)
+           dp[i] = true;
+        else
+            dp[i] = false;
+    }
+    
+    if(dp[n] == true)
+        return a;
+    else
+        return b;
+}
