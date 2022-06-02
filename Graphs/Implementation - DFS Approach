@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+void print(int** graphconnection , int v , int sv ,bool* visited)
+{
+    cout<<sv<<" ";
+    visited[sv] = true;
+    for(int i = 0 ; i<v ; i++)
+    {
+        if(sv == i)
+         continue;
+        
+        ifgraphconnection[sv][i] == 1)
+        {
+            if(visited[i])
+             continue;
+             
+            print(graphconnection , v , i , visited);
+        }
+    }
+}
+int main()
+{
+  int vertices , edges;
+  cout<<"Enter the no of vertices and edges"<<endl;
+  cin>>vertices>>edges;
+  int** graphconnection = new int*[vertices];
+  for(int i = 0 ; i<vertices ; i++)
+  {
+      graphconnection[i] = new int [vertices];
+      for(int j = 0 ; j<vertices ; j++)
+      {
+          graphconnection[i][j] = 0;
+      }
+  }
+  
+  // set the connections between vertices
+  for(int i = 0 ; i<edges ; i++)
+  {
+      int firstvertex,secondvertex;
+      cin>>firstvertex>>secondvertex;
+      graphconnection[firstvertex][secondvertex] = 1;
+      graphconnection[secondvertex][firstvertex]= 1;
+  }
+  
+  bool* visitedvertex = new bool[vertices];
+  for( int i = 0; i<vertices ;i++)
+  {
+       visitedvertex[i] = false;
+  }
+  
+  int startvertex = 0;
+  print(graphconnection , vertices , startvertex , visitedvertex);
+}
